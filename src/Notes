@@ -1,0 +1,29 @@
+Creational Design Patterns
+	1. SINGLETON
+	2. FACTORY
+	3. ABSTRACT FACTORY PATTERN
+	4. BUILDER
+
+Structural Design Patterns
+	1. ADAPTER
+	2. PROXY
+	3. FACADE
+	4. DECORATOR
+	5. BRIDGE
+
+Behavioral Design Patterns
+	1. TEMPLATE METHOD
+	2. CHAIN OF RESPONSIBILITY
+	3. STRATEGY
+	4. OBSERVER
+
+MVC
+DAO & DTO
+SERVICELOCATOR
+
+
+1. SINGLETON
+This pattern involves a single class which is responsible to create an object while making sure that only single object gets created.
+
+2. FACTORY
+https://www.tutorialspoint.com/design_pattern/factory_pattern.htm
