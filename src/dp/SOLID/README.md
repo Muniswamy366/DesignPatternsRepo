@@ -1,1 +1,0 @@
-There shouldn't be more than one reason to change change a class.
