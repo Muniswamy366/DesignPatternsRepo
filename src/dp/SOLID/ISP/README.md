@@ -40,7 +40,7 @@ class Ostrich implements Bird {
 
 
 
-
+2.    
 ❌ LSP Violation Example
 Let's say you have a Vehicle class that assumes all vehicles can be refueled with petrol:
 
