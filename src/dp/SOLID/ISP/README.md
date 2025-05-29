@@ -19,6 +19,7 @@ class Bird {
 class Ostrich extends Bird {
     public void fly() { throw new UnsupportedOperationException(); }
 }
+
 ✅ Solution:
 Redesign the hierarchy:
 
