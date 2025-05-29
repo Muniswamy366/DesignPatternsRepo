@@ -7,3 +7,31 @@ LSP segrigating related classes under one umbrilla, ISP is used to segrigate met
 
 Code example:
 https://www.javaguides.net/2018/02/interface-segregation-principle.html#:~:text=The%20Interface%20Segregation%20Principle%20states,are%20of%20interest%20to%20them.
+
+1. Subtypes must be substitutable for their base types without breaking behavior.
+
+❌ Violation:
+
+class Bird {
+    public void fly() {}
+}
+
+class Ostrich extends Bird {
+    public void fly() { throw new UnsupportedOperationException(); }
+}
+✅ Solution:
+Redesign the hierarchy:
+
+interface Bird {}
+
+interface FlyingBird extends Bird {
+    void fly();
+}
+
+class Sparrow implements FlyingBird {
+    public void fly() { /* flying logic */ }
+}
+
+class Ostrich implements Bird {
+    // does not fly
+}
