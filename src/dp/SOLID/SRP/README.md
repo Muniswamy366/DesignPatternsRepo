@@ -11,3 +11,28 @@ There are multiple responsibilities are handled in single UserController class.
 
 #### End
 1. Seperate validation and storing data into map into different classes.
+
+
+A class should have only one reason to change.
+
+❌ Violation:
+public class Invoice {
+    public void calculateTotal() { /* logic */ }
+    public void printInvoice() { /* logic */ }
+    public void saveToDB() { /* logic */ }
+}
+
+✅ Solution:
+Split responsibilities:
+
+public class Invoice {
+    public void calculateTotal() { /* logic */ }
+}
+
+public class InvoicePrinter {
+    public void print(Invoice invoice) { /* logic */ }
+}
+
+public class InvoiceRepository {
+    public void save(Invoice invoice) { /* logic */ }
+}
