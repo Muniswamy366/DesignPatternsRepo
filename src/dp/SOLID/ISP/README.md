@@ -10,6 +10,9 @@ LSP segrigating related classes under one umbrilla, ISP is used to segrigate met
 Code example:
 https://www.javaguides.net/2018/02/interface-segregation-principle.html#:~:text=The%20Interface%20Segregation%20Principle%20states,are%20of%20interest%20to%20them.
 
+![image](https://github.com/user-attachments/assets/e35bbfc8-a14e-4afd-9a4b-1905ab7c6c39)
+
+
 ❌ Violation:
 
 interface Machine {
