@@ -9,3 +9,10 @@ LSP segrigating related classes under one umbrilla, ISP is used to segrigate met
 
 Code example:
 https://www.javaguides.net/2018/02/interface-segregation-principle.html#:~:text=The%20Interface%20Segregation%20Principle%20states,are%20of%20interest%20to%20them.
+
+🔁 Summary Comparison
+Aspect	Liskov Substitution Principle (LSP)	Interface Segregation Principle (ISP)
+🔍 Focus	Behavior compatibility in inheritance	Interface size and usage
+🔥 Violation	Subclass breaks base class behavior	Class forced to implement unused methods
+✅ Fix	Use appropriate abstraction, avoid incorrect inheritance	Split large interfaces into smaller ones
+📌 Goal	Replace base class with subclass safely	Keep interfaces lean and role-specific
