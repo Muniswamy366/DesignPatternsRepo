@@ -3,7 +3,7 @@ Depend on abstractions, not on concrete implementations.
 
  https://github.com/Java-Techie-jt/solid-principles-example/blob/main/src/main/java/com/javatechie/solid/dip/ShoppingMall.java
 
- https://www.youtube.com/watch?v=BM_lSZPMClo&t=1108s
+ https://www.youtube.com/watch?v=BM_lSZPMClo&t=1508s
 
 ❌ Violation:
 
