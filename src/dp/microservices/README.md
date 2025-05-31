@@ -45,13 +45,14 @@ Since ACID transactions don’t scale across services and databases, SAGA is use
 
 Example:
 
-Order Service → emits "Order Created"
+* Order Service → emits "Order Created"
 ↓
-Payment Service → emits "Payment Completed"
+* Payment Service → emits "Payment Completed"
 ↓
-Inventory Service → emits "Inventory Reserved"
+* Inventory Service → emits "Inventory Reserved"
 ↓
-Shipping Service → ships the product
+* Shipping Service → ships the product
+  
 # b. Orchestration (Central Coordinator)
 - A central orchestrator controls the flow.
 
@@ -59,7 +60,7 @@ Shipping Service → ships the product
 
 Example:
 
-Orchestrator → call OrderService
+*Orchestrator → call OrderService
              → call PaymentService
              → call InventoryService
              → call ShippingService
