@@ -35,8 +35,8 @@ SAGA is asynchronous, 2PC is synchronous.
 * ### SAGA Pattern – Managing Distributed Transactions
 Since ACID transactions don’t scale across services and databases, SAGA is used for managing long-running distributed transactions.
 
-## SAGA Approaches:
-# a. Choreography (Event-Based)
+### SAGA Approaches:
+#### a. Choreography (Event-Based)
 - Each service listens for events and reacts accordingly.
 
 - No central controller.
@@ -53,7 +53,7 @@ Example:
 ↓
 * Shipping Service → ships the product
   
-# b. Orchestration (Central Coordinator)
+#### b. Orchestration (Central Coordinator)
 - A central orchestrator controls the flow.
 
 - More control, easier to trace, but can become a bottleneck.
