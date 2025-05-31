@@ -3,6 +3,9 @@ CQRS stands for Command Query Responsibility Segregation. It’s a pattern that 
 Commands (write/update operations)  
 Queries (read operations)
 
+https://www.youtube.com/watch?v=fzGZPf0FMao  
+https://github.com/Java-Techie-jt/cqrs-design-pattern  
+
 🎯 Goal:
 - To optimize performance, scalability, and security by handling reads and writes separately.
 
