@@ -45,25 +45,25 @@ Since ACID transactions don’t scale across services and databases, SAGA is use
 
 Example:
 
-* Order Service → emits "Order Created"
-↓
-* Payment Service → emits "Payment Completed"
-↓
-* Inventory Service → emits "Inventory Reserved"
-↓
-* Shipping Service → ships the product
+Order Service → emits "Order Created"  
+↓  
+Payment Service → emits "Payment Completed"  
+↓  
+Inventory Service → emits "Inventory Reserved"  
+↓  
+Shipping Service → ships the product
   
 #### b. Orchestration (Central Coordinator)
 - A central orchestrator controls the flow.
 
 - More control, easier to trace, but can become a bottleneck.
 
-Example:
+Example:  
 
-* Orchestrator → call OrderService
-             → call PaymentService
-             → call InventoryService
-             → call ShippingService
+Orchestrator → call OrderService  
+             → call PaymentService  
+             → call InventoryService  
+             → call ShippingService  
 
 * ### Difference between Monolith vs SOA vs Microservices
 refer pic
