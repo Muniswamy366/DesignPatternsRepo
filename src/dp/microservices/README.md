@@ -53,17 +53,17 @@ Inventory Service → emits "Inventory Reserved"
 ↓  
 Shipping Service → ships the product
 
-#If failure occurs:
+# If failure occurs:
 - Services emit failure events (PaymentFailed, InventoryFailed)
 
 - Other services listen and compensate (e.g., cancel order, refund)
 
-✅ # Pros:
+✅ Pros:
 - Simple, no central orchestrator
 
 - Loosely coupled
 
-❌ # Cons:
+❌ Cons:
 - Hard to monitor and debug
 
 - Complex logic spread across services
