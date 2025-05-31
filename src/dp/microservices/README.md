@@ -80,7 +80,8 @@ Orchestrator → call OrderService
              → call InventoryService  
              → call ShippingService  
 
-```public class OrderOrchestrator {
+```
+public class OrderOrchestrator {
 
     public void processOrder(Order order) {
         try {
