@@ -39,7 +39,7 @@ Service Discovery
 Side Car Pattern
 CQRS
 
-Choose Appropriate Sharding Keys
+### Choose Appropriate Sharding Keys
 Sharding is the process of splitting data across multiple nodes (shards) so that each node only holds a portion of the data.
 
 ✅ Good Sharding Key Characteristics:
