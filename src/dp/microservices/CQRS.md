@@ -12,11 +12,11 @@ https://github.com/Java-Techie-jt/cqrs-design-pattern
 #### When to Use  
 
 1. 🧠 Separation of Concerns
-- Writes (Commands): Focus on business logic and validations.
++ Writes (Commands): Focus on business logic and validations.
 
-- Reads (Queries): Focus on displaying data efficiently (e.g., joined DTOs).
++ Reads (Queries): Focus on displaying data efficiently (e.g., joined DTOs).
 
-- This makes your code cleaner, simpler, and easier to maintain.
++ This makes your code cleaner, simpler, and easier to maintain.
 
 2. ⚡ Performance Optimization
 - Read models can be denormalized and optimized for fast queries.
