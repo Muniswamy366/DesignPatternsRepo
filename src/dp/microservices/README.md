@@ -52,6 +52,21 @@ Payment Service → emits "Payment Completed"
 Inventory Service → emits "Inventory Reserved"  
 ↓  
 Shipping Service → ships the product
+
+#If failure occurs:
+- Services emit failure events (PaymentFailed, InventoryFailed)
+
+- Other services listen and compensate (e.g., cancel order, refund)
+
+✅ # Pros:
+- Simple, no central orchestrator
+
+- Loosely coupled
+
+❌ # Cons:
+- Hard to monitor and debug
+
+- Complex logic spread across services
   
 #### b. Orchestration (Central Coordinator)
 - A central orchestrator controls the flow.
