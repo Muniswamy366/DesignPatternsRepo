@@ -38,3 +38,19 @@ refer pic
 Service Discovery
 Side Car Pattern
 CQRS
+
+Choose Appropriate Sharding Keys
+Sharding is the process of splitting data across multiple nodes (shards) so that each node only holds a portion of the data.
+
+✅ Good Sharding Key Characteristics:
+Uniform distribution of data across nodes.
+
+Predictable access patterns (avoid hotspots).
+
+Stable over time (doesn't frequently change).
+
+⚠️ Bad Example:
+Using country as a sharding key in a global app – some countries (e.g., USA, India) may get more data → hotspot problem.
+
+✅ Good Example:
+Use a user ID or hash of email as the sharding key – more likely to evenly distribute.
