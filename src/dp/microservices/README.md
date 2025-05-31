@@ -7,10 +7,10 @@ Monolithic is low in Cohesion and Microservices are high in Cohesion.
 
 The circuit breaker works by switching between three states: closed, open, and half-open
 
-* #### Closed
+#### Closed
 In the closed state, the circuit breaker allows requests to flow through and execute the operation as normal.
 
-* #### Open
+#### Open
 In the open state, the circuit breaker returns a pre-configured fallback value instead of executing the operation.
 
 #### Half-Open
@@ -31,6 +31,38 @@ Watch: https://hdfcbank.udemy.com/course/microservices-interview-questions-passs
 https://medium.com/javarevisited/difference-between-saga-pattern-and-2-phase-commit-in-microservices-e1d814e12a5a
 
 SAGA is asynchronous, 2PC is synchronous.
+
+* ### SAGA Pattern – Managing Distributed Transactions
+Since ACID transactions don’t scale across services and databases, SAGA is used for managing long-running distributed transactions.
+
+## SAGA Approaches:
+# a. Choreography (Event-Based)
+- Each service listens for events and reacts accordingly.
+
+- No central controller.
+
+- Lightweight but harder to manage for complex flows.
+
+Example:
+
+Order Service → emits "Order Created"
+↓
+Payment Service → emits "Payment Completed"
+↓
+Inventory Service → emits "Inventory Reserved"
+↓
+Shipping Service → ships the product
+# b. Orchestration (Central Coordinator)
+- A central orchestrator controls the flow.
+
+- More control, easier to trace, but can become a bottleneck.
+
+Example:
+
+Orchestrator → call OrderService
+             → call PaymentService
+             → call InventoryService
+             → call ShippingService
 
 * ### Difference between Monolith vs SOA vs Microservices
 refer pic
