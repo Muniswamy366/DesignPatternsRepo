@@ -60,7 +60,7 @@ Example:
 
 Example:
 
-*Orchestrator → call OrderService
+* Orchestrator → call OrderService
              → call PaymentService
              → call InventoryService
              → call ShippingService
