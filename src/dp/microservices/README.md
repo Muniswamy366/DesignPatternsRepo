@@ -53,7 +53,7 @@ Inventory Service → emits "Inventory Reserved"
 ↓  
 Shipping Service → ships the product
 
-# If failure occurs:
+#### If failure occurs:
 - Services emit failure events (PaymentFailed, InventoryFailed)
 
 - Other services listen and compensate (e.g., cancel order, refund)
@@ -79,6 +79,23 @@ Orchestrator → call OrderService
              → call PaymentService  
              → call InventoryService  
              → call ShippingService  
+
+```public class OrderOrchestrator {
+
+    public void processOrder(Order order) {
+        try {
+            paymentService.pay(order);
+            inventoryService.reserve(order);
+            shippingService.ship(order);
+        } catch (Exception e) {
+            // Compensation in reverse order
+            shippingService.cancel(order);
+            inventoryService.release(order);
+            paymentService.refund(order);
+        }
+    }
+}
+```
 
 * ### Difference between Monolith vs SOA vs Microservices
 refer pic
