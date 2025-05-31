@@ -12,23 +12,23 @@ https://github.com/Java-Techie-jt/cqrs-design-pattern
 #### When to Use  
 
 1. 🧠 Separation of Concerns
-Writes (Commands): Focus on business logic and validations.
+- Writes (Commands): Focus on business logic and validations.
 
-Reads (Queries): Focus on displaying data efficiently (e.g., joined DTOs).
+- Reads (Queries): Focus on displaying data efficiently (e.g., joined DTOs).
 
-This makes your code cleaner, simpler, and easier to maintain.
+- This makes your code cleaner, simpler, and easier to maintain.
 
 2. ⚡ Performance Optimization
-Read models can be denormalized and optimized for fast queries.
+- Read models can be denormalized and optimized for fast queries.
 
-Write models can focus on consistency and validation.
+- Write models can focus on consistency and validation.
 
-You can use different databases (e.g., SQL for writes, NoSQL for reads).
+- You can use different databases (e.g., SQL for writes, NoSQL for reads).
 
 3. 📈 Independent Scaling
-Read traffic is usually much higher than write traffic.
+- Read traffic is usually much higher than write traffic.
 
-With CQRS, you can scale read and write services separately.  
+- With CQRS, you can scale read and write services separately.  
 
 ✅ Use CQRS when:
 
