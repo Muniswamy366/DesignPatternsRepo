@@ -6,7 +6,7 @@ Queries (read operations)
 🎯 Goal:
 - To optimize performance, scalability, and security by handling reads and writes separately.
 
-####🧠 When to Use
+🧠 ## When to Use
 ✅ Use CQRS when:
 
 - High read/write load
