@@ -7,7 +7,7 @@ https://www.youtube.com/watch?v=fzGZPf0FMao
 https://github.com/Java-Techie-jt/cqrs-design-pattern  
 
 🎯 Goal:
-- To optimize performance, scalability, and security by handling reads and writes separately.
+- To optimize ``performance, scalability``, and security by handling reads and writes separately.
 
 #### When to Use  
 ✅ Use CQRS when:
