@@ -1,10 +1,5 @@
 ### Domain Driven Design
 
-#### Netflix:
-**Video Streaming:** Core domain responsible for streaming videos.  
-**Recommendations:** Subdomain handling personalized recommendations.  
-**Billing:** Manages subscriptions and payment details.  
-
 **Entities:** Objects with a distinct, continuous identity (e.g., a User with an Id and Name).  
 **Aggregates:** Group of entities or Clusters of domain objects grouped together for transactional consistency.  
 
@@ -79,6 +74,12 @@ Generic Subdomain: Common boilerplate (e.g., authentication)
 
 
 ![image](https://github.com/user-attachments/assets/79175a09-f193-4e56-8175-37be4bce29f2)
+
+
+#### Netflix:
+**Video Streaming:** Core domain responsible for streaming videos.  
+**Recommendations:** Subdomain handling personalized recommendations.  
+**Billing:** Manages subscriptions and payment details.  
 
 Below are sub domains  
 ![image](https://github.com/user-attachments/assets/991ce177-8111-4f8e-a118-9842b8b38163)
