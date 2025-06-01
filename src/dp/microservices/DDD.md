@@ -68,10 +68,19 @@ Billing Domain
 
 Subdomains: Invoicing, Tax Calculation  
 
+### Subdomain:  
+A subdomain is a logical subset of your overall business domain. There are 3 types:  
+
+Core Subdomain: Key competitive differentiator (e.g., pricing engine for Amazon)  
+
+Supporting Subdomain: Needed to support core (e.g., notifications)  
+
+Generic Subdomain: Common boilerplate (e.g., authentication)  
+
 
 ![image](https://github.com/user-attachments/assets/79175a09-f193-4e56-8175-37be4bce29f2)
 
-Below are domains  
+Below are sub domains  
 ![image](https://github.com/user-attachments/assets/991ce177-8111-4f8e-a118-9842b8b38163)
 
 
