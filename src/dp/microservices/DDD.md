@@ -55,6 +55,19 @@ So instead, each department gets its own Bounded Context:
 
 Each context has its own version of "Order" that makes sense only in that department.  
 
+### Domain (and Subdomains from DDD perspective):  
+Ordering Domain  
+
+Subdomains: Cart, Checkout, Payment  
+
+Customer Domain  
+
+Subdomains: Profile, Address Book  
+
+Billing Domain  
+
+Subdomains: Invoicing, Tax Calculation  
+
 
 ![image](https://github.com/user-attachments/assets/79175a09-f193-4e56-8175-37be4bce29f2)
 
