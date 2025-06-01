@@ -58,7 +58,7 @@ Each context has its own version of "Order" that makes sense only in that depart
 
 ![image](https://github.com/user-attachments/assets/79175a09-f193-4e56-8175-37be4bce29f2)
 
-Below are domains
+Below are domains  
 ![image](https://github.com/user-attachments/assets/991ce177-8111-4f8e-a118-9842b8b38163)
 
 
