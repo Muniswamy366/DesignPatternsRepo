@@ -14,6 +14,8 @@
 **Entity:** A person – even if they change their name or address, they're still the same individual.  
 **Value Object:** A home address – if any detail changes (e.g., street name), it's treated as a new address.  
 
+![image](https://github.com/user-attachments/assets/bf4ab0e4-a29c-49cb-a2d7-07d386e7fa73)   
+
 ✅ ** Bounded Context means:** “This part of the system has its own clear meaning for domain concepts (like Order), and doesn’t share them directly with other parts.”  
 
 Imagine a Real-Life Business: Amazon has many different departments (or contexts) like:  
@@ -55,9 +57,6 @@ Each context has its own version of "Order" that makes sense only in that depart
 
 
 ![image](https://github.com/user-attachments/assets/79175a09-f193-4e56-8175-37be4bce29f2)
-
-
-![image](https://github.com/user-attachments/assets/bf4ab0e4-a29c-49cb-a2d7-07d386e7fa73)   
 
 ![image](https://github.com/user-attachments/assets/991ce177-8111-4f8e-a118-9842b8b38163)
 
