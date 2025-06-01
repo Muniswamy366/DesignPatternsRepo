@@ -45,11 +45,11 @@ If you tried to use one common model for "Order" across all departments, it woul
 
 So instead, each department gets its own Bounded Context:  
 
-+----------------------+   +---------------------+   +----------------------+
-|  Sales Bounded Context|   | Shipping Bounded Context|   | Payments Bounded Context |
-|----------------------|   |---------------------|   |----------------------|
-| Order (id, items,...)|   | Order (id, address,...)|   | Order (id, amount,...)|
-+----------------------+   +---------------------+   +----------------------+
++----------------------+   +---------------------+   +----------------------+  
+|  Sales Bounded Context|   | Shipping Bounded Context|   | Payments Bounded Context |  
+|----------------------|   |---------------------|   |----------------------|  
+| Order (id, items,...)|   | Order (id, address,...)|   | Order (id, amount,...)|  
++----------------------+   +---------------------+   +----------------------+  
 
 Each context has its own version of "Order" that makes sense only in that department.  
 
