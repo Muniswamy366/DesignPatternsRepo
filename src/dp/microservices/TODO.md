@@ -1,2 +1,3 @@
 Istio  
-ElasticSearch
+ElasticSearch  
+Redis/Memcached  
