@@ -1,7 +1,7 @@
 ### Domain Driven Design
 
 #### Netflix:
-**Video Streaming:** Core domain responsible for streaming videos.  
+Video Streaming: Core domain responsible for streaming videos.  
 **Recommendations:** Subdomain handling personalized recommendations.  
 **Billing:** Manages subscriptions and payment details.  
 
