@@ -44,4 +44,11 @@ Client → Reverse Proxy → Web Servers
 
 Example: A website uses NGINX as a reverse proxy to route traffic to various microservices.  
 
+#### Drawbacks
+Single Point of Failure: If not highly available.  
+
+Latency: Adds an extra network hop.  
+
+Complexity: Requires careful design and management.  
+
 
