@@ -1,4 +1,4 @@
-** What it does: **
+**What it does:**
 A single entry point for all clients to interact with backend microservices.
 
 ** Why use it: **
