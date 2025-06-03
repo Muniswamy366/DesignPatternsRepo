@@ -16,7 +16,13 @@ Kong, Spring Cloud Gateway, Zuul, NGINX, Ambassador.
 
 * Handles authentication, authorization, rate limiting, load balancing, caching, and request/response transformation
 
-Reverse Proxy:  
+#### Why Use an API Gateway?
+In a microservices architecture, each service is independently deployable and might expose its own API. Without a gateway:  
+
+* Clients must call multiple services directly.  
+* Each service must handle cross-cutting concerns like authentication, rate limiting, etc.  
+
+**Reverse Proxy:**  
 A reverse proxy is a server that sits between clients and backend servers (like web or application servers). It forwards client requests to the appropriate backend server, then returns the server’s response back to the client.  
 
 ### Reverse Proxy vs Forward Proxy
