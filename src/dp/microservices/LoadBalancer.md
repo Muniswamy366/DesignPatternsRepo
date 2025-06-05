@@ -78,7 +78,7 @@ When you use:
 ```
 uri: lb://user-service
 ```
-**Spring Cloud Gateway (via Spring Cloud LoadBalancer) will:**
+#### 1. Spring Cloud Gateway (via Spring Cloud LoadBalancer) will:**
 
 * Ask Kubernetes (via Spring Cloud Kubernetes) for the list of available endpoints (pods) of user-service.
 
@@ -86,7 +86,25 @@ uri: lb://user-service
 
 * You do not need a third-party discovery system like Eureka here — Kubernetes provides discovery through DNS + API.
 
-#### Configure AWS NLB (Layer 4) in Kubernetes (Pod to Pod)  
+#### 2. Basic LoadBalancer Service (for Web App)
+This is a standard way to expose a service via cloud provider's default L4/L7 load balancer, without using ALB Controller or AWS-specific annotations.
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: internal-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: internal
+  ports:
+    - port: 443
+      targetPort: 8443
+```
+
+#### 3. Configure AWS NLB (Layer 4) in Kubernetes (Pod to Pod)  
 ```
 apiVersion: v1
 kind: Service
@@ -109,7 +127,7 @@ nlb = AWS Network Load Balancer (L4).
 internal = true makes it not publicly accessible.  
 Useful for internal microservices, gRPC, TLS passthrough, etc.  
 
-#### Configure AWS ALB (Layer 7) via AWS Load Balancer Controller (Pod to Pod)  
+#### 4. Configure AWS ALB (Layer 7) via AWS Load Balancer Controller (Pod to Pod)  
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
