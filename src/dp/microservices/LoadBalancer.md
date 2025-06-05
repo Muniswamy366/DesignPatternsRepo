@@ -104,12 +104,46 @@ spec:
       targetPort: 8443
   type: LoadBalancer
 ```
-**Notes:**
+**Notes:**  
 nlb = AWS Network Load Balancer (L4).  
 internal = true makes it not publicly accessible.  
 Useful for internal microservices, gRPC, TLS passthrough, etc.  
 
-#### Configure AWS ALB (Layer 7) via AWS Load Balancer Controller (Pod to Pod)
+#### Configure AWS ALB (Layer 7) via AWS Load Balancer Controller (Pod to Pod)  
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/group.name: my-app
+spec:
+  rules:
+    - host: myapp.example.com
+      http:
+        paths:
+          - path: /web
+            pathType: Prefix
+            backend:
+              service:
+                name: web-service
+                port:
+                  number: 80
+```
+
+| Feature          | NLB (Layer 4)                         | ALB (Layer 7)                            |
+| ---------------- | ------------------------------------- | ---------------------------------------- |
+| **K8s Resource** | `Service` with `type: LoadBalancer`   | `Ingress` + AWS Load Balancer Controller |
+| **Routing Type** | TCP, UDP                              | HTTP, HTTPS (host/path-based)            |
+| **Access**       | Internal or external                  | Public or private                        |
+| **Annotations**  | `aws-load-balancer-type: "nlb"`       | `kubernetes.io/ingress.class: alb`, etc. |
+| **Use Case**     | Internal services, payment, gRPC, TLS | Public APIs, websites, web apps          |
+
 
 
 
