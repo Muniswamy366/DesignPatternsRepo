@@ -9,7 +9,7 @@ Kubernetes DNS-based Service Discovery
 Spring Boot Microservices (UserService, PaymentService)  
 
 Use Spring Boot with Spring Cloud Gateway and Kubernetes integration.  
-
+```
 <dependencies>
     <dependency>
         <groupId>org.springframework.cloud</groupId>
@@ -20,5 +20,6 @@ Use Spring Boot with Spring Cloud Gateway and Kubernetes integration.
         <artifactId>spring-cloud-starter-kubernetes-fabric8</artifactId>
     </dependency>
 </dependencies>
+```
 
 
