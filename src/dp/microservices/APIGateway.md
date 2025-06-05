@@ -66,8 +66,6 @@ Complexity: Requires careful design and management.
 | ------------------------ | ------------------------- | ---------------- | ---------------------------------------------------------------------------- | ---------------------- |
 | **Kong Gateway 3.10.x**  | \~127,000 (no plugins)    | 7.1              | High throughput with low latency; performance decreases with added plugins.  |                        |
 | **Spring Cloud Gateway** | \~32,000                  | \~6.6            | Moderate performance; suitable for Spring-based applications.                |                        |
-| **NGINX**                | \~30,000                  | <30              | Consistent low latency; performance may vary with complex configurations.    | ([docs.konghq.com][1]) |
-
-[1]: https://docs.konghq.com/gateway/latest/production/performance/performance-testing/?utm_source=chatgpt.com "Performance testing benchmarks - Kong Gateway"
+| **NGINX**                | \~30,000                  | <30              | Consistent low latency; performance may vary with complex configurations.    |  |
 
 
