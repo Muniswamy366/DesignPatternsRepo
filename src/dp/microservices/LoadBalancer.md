@@ -21,6 +21,20 @@ spec:
 ### External Load Balancing (To expose apps)  
 
 Use Service type: LoadBalancer to expose apps outside the cluster via a cloud provider's load balancer (like AWS ELB, Azure LB, GCP LB).  
+
+```
+User Request (from internet)
+        |
+        v
+[ Cloud LoadBalancer (from Service type=LoadBalancer) ]
+        |
+        v
+[ Ingress Controller or API Gateway Pod ]
+        |
+        v
+[ user-svc (via K8s Service) ]
+```
+
 ```
 apiVersion: v1
 kind: Service
