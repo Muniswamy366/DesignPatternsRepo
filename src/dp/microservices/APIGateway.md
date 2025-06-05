@@ -66,6 +66,34 @@ Complexity: Requires careful design and management.
 | ------------------------ | ------------------------- | ---------------- | ---------------------------------------------------------------------------- | ---------------------- |
 | **Kong Gateway 3.10.x**  | \~127,000 (no plugins)    | 7.1              | High throughput with low latency; performance decreases with added plugins.  |                        |
 | **Spring Cloud Gateway** | \~32,000                  | \~6.6            | Moderate performance; suitable for Spring-based applications.                |                        |
-| **NGINX**                | \~30,000                  | <30              | Consistent low latency; performance may vary with complex configurations.    |  |
+| **NGINX**                | \~30,000                  | <30              | Consistent low latency; performance may vary with complex configurations.    |  |  
+
+Observations: Kong maintains high throughput and low latency, even with added plugins, making it suitable for high-performance applications.  
+Observations: While SCG offers decent performance, it may not match the throughput of Kong or NGINX, especially under high load.  
+Observations: NGINX provides stable and low-latency performance, making it a reliable choice for scenarios where consistent response times are critical.  
+
+#### Final Tip  
+In real-world systems, teams often combine:
+
+* Spring Cloud Gateway for internal, secure traffic within Spring ecosystem
+
+* Kong or NGINX as the external, hardened API edge gateway
+
+| Feature                      | **Spring Cloud Gateway**     | **Kong Gateway**                        | **NGINX** (open-source/pro)         |
+| ---------------------------- | ---------------------------- | --------------------------------------- | ----------------------------------- |
+| **Language**                 | Java (Spring Boot)           | C / Lua (native)                        | C                                   |
+| **Deployment**               | Embedded in Spring Boot apps | Standalone / Docker / K8s               | Standalone / Docker / K8s           |
+| **Best For**                 | Java/Spring microservices    | Language-agnostic, high-scale APIs      | Static reverse proxy/load balancer  |
+| **Performance**              | Moderate (JVM overhead)      | High (native binary, optimized)         | Very High (lightweight)             |
+| **Plugin Ecosystem**         | Basic via Spring filters     | Very rich (JWT, OAuth, ACL, gRPC, etc.) | Limited in OSS; rich in NGINX Plus  |
+| **Authentication Support**   | Spring Security integration  | Built-in JWT/OAuth2 plugins             | Custom or NGINX Plus                |
+| **Rate Limiting**            | Redis or custom filters      | Native plugin                           | Requires custom config or Plus      |
+| **gRPC/WebSocket Support**   | Partial                      | Full                                    | Limited (better in NGINX Plus)      |
+| **Admin Dashboard**          | ❌ Manual or custom           | ✅ Kong Manager (UI) in Enterprise       | ❌ (NGINX Plus has dashboard)        |
+| **Service Discovery**        | ✅ (Eureka, Consul)           | ✅ DNS or via Kong Mesh                  | ❌ (manual or 3rd party like Consul) |
+| **Cloud/Kubernetes Support** | Spring Cloud K8s             | ✅ Kong Ingress Controller for K8s       | ✅ NGINX Ingress (very popular)      |
+| **Open Source**              | ✅ Fully open source          | ✅ + Enterprise edition                  | ✅ OSS + NGINX Plus (commercial)     |
+| **Custom Extensions**        | Write filters in Java        | Write plugins in Lua or JS (EE)         | Write custom modules in C (harder)  |
+
 
 
