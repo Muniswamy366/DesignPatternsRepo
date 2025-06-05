@@ -51,4 +51,14 @@ Latency: Adds an extra network hop.
 
 Complexity: Requires careful design and management.  
 
+#### Key Responsibilities:  
+
+* Routing: Forward requests to the right microservice.  
+* Authentication & Authorization: Verify user identity and access.  
+* Rate Limiting & Throttling  
+* Request/Response Transformation  
+* Caching  
+* Monitoring / Logging  
+* Service Discovery (optional)  
+
 
