@@ -1,3 +1,41 @@
+### Internal Load Balancing (Between Pods)
+Kubernetes automatically does internal load balancing using its Service abstraction.  
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80        # Exposed inside the cluster
+      targetPort: 8080  # Pod container port
+  type: ClusterIP
+```
+* Requests sent to my-service are automatically load-balanced across all matching pods.
+
+* Load balancing is done via kube-proxy using iptables or IPVS (round-robin).
+
+### External Load Balancing (To expose apps)  
+
+Use Service type: LoadBalancer to expose apps outside the cluster via a cloud provider's load balancer (like AWS ELB, Azure LB, GCP LB).  
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
+```
+
+
 Prompt chatGPT: example of configure spring Cloud Gateway with load Balancing, kubernetes and spring boot application
 Client  
   |  
