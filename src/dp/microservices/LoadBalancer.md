@@ -214,6 +214,6 @@ spec:
 | **Annotations**  | `aws-load-balancer-type: "nlb"`       | `kubernetes.io/ingress.class: alb`, etc. |
 | **Use Case**     | Internal services, payment, gRPC, TLS | Public APIs, websites, web apps          |
 
-
+Prompt: provide me example of kubernetes with service discovery and load balancer with multiple regions   
 
 
