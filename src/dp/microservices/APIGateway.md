@@ -96,4 +96,4 @@ In real-world systems, teams often combine:
 | **Custom Extensions**        | Write filters in Java        | Write plugins in Lua or JS (EE)         | Write custom modules in C (harder)  |
 
 
-
+**Prompt:** provide me example of kubernetes with service discovery and load balancer with multiple regions   
