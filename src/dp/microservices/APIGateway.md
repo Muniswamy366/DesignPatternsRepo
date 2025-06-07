@@ -99,7 +99,7 @@ In real-world systems, teams often combine:
 **Prompt:** provide me example of kubernetes with service discovery and load balancer with multiple regions   
 
 ### Core Features of API Gateway
-1. Request Routing
+1. Request Routing  
 Routes incoming requests to appropriate backend services based on paths, headers, or other criteria.
 
 ```
@@ -113,7 +113,7 @@ spring:
             - Path=/api/products/**
 ```
 
-2. Load Balancing
+2. Load Balancing  
 Distributes traffic across multiple instances of backend services.
 
 ```
@@ -128,7 +128,7 @@ spring:
             - Path=/api/orders/**
 ```
 
-3. Authentication & Authorization
+3. Authentication & Authorization  
 Centralizes security concerns by integrating with OAuth2/OIDC providers.
 
 ```
@@ -147,7 +147,7 @@ public class SecurityConfig {
 }
 ```
 
-4. Request/Response Transformation
+4. Request/Response Transformation  
 Modifies requests or responses as they pass through the gateway.
 
 ```
@@ -165,7 +165,7 @@ spring:
             - AddResponseHeader=X-Response-Time, ${now}
 ```
 
-5. Rate Limiting
+5. Rate Limiting  
 Protects backend services from being overwhelmed by too many requests.
 
 ```
@@ -184,7 +184,7 @@ spring:
                 redis-rate-limiter.burstCapacity: 20
 ```
 
-6. Circuit Breaking
+6. Circuit Breaking  
 Prevents cascading failures by detecting and isolating failing services.
 
 ```
@@ -203,7 +203,7 @@ spring:
                 fallbackUri: forward:/fallback/inventory
 ```
 
-7. Request Logging & Monitoring
+7. Request Logging & Monitoring  
 Provides visibility into API traffic and performance.
 
 ```
@@ -225,7 +225,7 @@ public class GatewayConfig {
 }
 ```
 
-8. Token Relay
+8. Token Relay  
 Forwards authentication tokens to downstream services.
 
 ```
@@ -241,7 +241,7 @@ spring:
             - TokenRelay=
 ```
 
-9. Request Validation
+9. Request Validation  
 Validates incoming requests before they reach backend services.
 
 ```
@@ -265,7 +265,7 @@ public class RequestValidator extends AbstractGatewayFilterFactory<RequestValida
 }
 ```
 
-10. Cross-Origin Resource Sharing (CORS)
+10. Cross-Origin Resource Sharing (CORS)  
 Handles CORS headers for web applications.
 
 ```
@@ -283,7 +283,7 @@ spring:
             maxAge: 3600
 ```
 
-11. SSL Termination
+11. SSL Termination  
 Handles HTTPS connections and forwards requests as HTTP to internal services.
 
 ```
@@ -296,7 +296,7 @@ server:
   port: 8443
 ```
 
-12. Request Aggregation
+12. Request Aggregation  
 Combines results from multiple backend services into a single response.
 
 ```
@@ -328,7 +328,7 @@ public class AggregationController {
 }
 ```
 
-13. Caching
+13. Caching  
 Caches responses to improve performance and reduce backend load.
 
 ```
@@ -365,7 +365,7 @@ public class CachingFilter extends AbstractGatewayFilterFactory<CachingFilter.Co
 }
 ```
 
-14. API Versioning
+14. API Versioning  
 Handles different versions of APIs through routing.
 
 ```
@@ -383,7 +383,7 @@ spring:
             - Path=/api/v2/products/**
 ```
 
-15. Retry Mechanism
+15. Retry Mechanism  
 Automatically retries failed requests to improve resilience.
 
 ```
