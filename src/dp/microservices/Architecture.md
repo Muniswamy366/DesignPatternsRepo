@@ -8,12 +8,9 @@
 * Request targets a specific service (e.g., /api/service-a/resource)  
 
 2. Authentication Check
-* If the user is not authenticated, the gateway redirects to Keycloak
-* Keycloak presents a login page to the user
-* User provides credentials to Keycloak
-* Keycloak validates credentials and generates OAuth2/OIDC tokens (access token, refresh token)
-* Keycloak redirects back to the gateway with the tokens
-* The gateway stores these tokens in the user's session
+* Gateway checks if request has valid authentication  
+* If not authenticated, redirects to Keycloak  Add commentMore actions
+* User provides credentials to Keycloak  
 
 3. Token Issuance
 * Keycloak validates credentials  
