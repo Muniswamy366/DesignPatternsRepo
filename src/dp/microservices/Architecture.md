@@ -28,14 +28,18 @@
 * Gateway gets endpoints for the requested service (e.g., Service A)
 
 6. Load Balancing
-* Gateway selects a specific pod instance using load balancing algorithm
-* Typically round-robin, but can be weighted or other strategies
-* Selection is made from available healthy pods
+* The gateway receives a list of available instances for the target service  
+* Using the "lb://" prefix in route definitions, the gateway activates client-side load balancing  
+* The gateway selects an instance based on load balancing algorithm (round-robin by default)  
+* Selection is made from available healthy pods  
+* This distributes traffic evenly across all available pods of the service
 
 7. Token Relay & Request Forwarding
-* Gateway adds the user's access token to outgoing request as Authorization header
-* Gateway forwards the request to selected pod instance
-* Original request path is modified according to routing rules
+* Before forwarding the request, the gateway applies the TokenRelay filter  
+* The filter extracts the OAuth2 access token from the current security context  
+* Gateway adds the user's access token to outgoing request as Authorization header  
+* Gateway forwards the request to selected pod instance  
+* Original request path is modified according to routing rules  
 
 8. Service Processing
 * Service pod receives the request with the token
@@ -51,3 +55,9 @@
 * Gateway may apply response filters or transformations
 * Gateway forwards the final response to the original user
 * User receives the response
+
+11. Subsequent Requests
+* For subsequent requests, the user's tokens are already available
+* The gateway validates the access token or uses the refresh token if needed
+* Steps 5-10 repeat for each request
+* This creates a seamless experience where the user only authenticates once
