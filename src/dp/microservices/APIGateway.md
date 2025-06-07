@@ -151,6 +151,14 @@ public class SecurityConfig {
 Modifies requests or responses as they pass through the gateway.
 
 ```
+filters:
+  - name: AddRequestHeader
+    args:
+      name: X-Gateway-Header
+      value: gateway
+```
+
+```
 spring:
   cloud:
     gateway:
