@@ -97,3 +97,313 @@ In real-world systems, teams often combine:
 
 
 **Prompt:** provide me example of kubernetes with service discovery and load balancer with multiple regions   
+
+### Core Features of API Gateway
+1. Request Routing
+Routes incoming requests to appropriate backend services based on paths, headers, or other criteria.
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/products/**
+```
+
+2. Load Balancing
+Distributes traffic across multiple instances of backend services.
+
+```
+# Using the lb:// prefix enables client-side load balancing
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+          uri: lb://order-service  # Load balances across instances
+          predicates:
+            - Path=/api/orders/**
+```
+
+3. Authentication & Authorization
+Centralizes security concerns by integrating with OAuth2/OIDC providers.
+
+```
+@Configuration
+public class SecurityConfig {
+    @Bean
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        return http
+            .oauth2Login(Customizer.withDefaults())
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+            .authorizeExchange(exchanges -> exchanges
+                .pathMatchers("/public/**").permitAll()
+                .anyExchange().authenticated())
+            .build();
+    }
+}
+```
+
+4. Request/Response Transformation
+Modifies requests or responses as they pass through the gateway.
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - AddRequestHeader=X-Request-Source, api-gateway
+            - RemoveRequestHeader=X-Internal-Header
+            - AddResponseHeader=X-Response-Time, ${now}
+```
+
+5. Rate Limiting
+Protects backend services from being overwhelmed by too many requests.
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payments/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+```
+
+6. Circuit Breaking
+Prevents cascading failures by detecting and isolating failing services.
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/api/inventory/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: inventoryCircuitBreaker
+                fallbackUri: forward:/fallback/inventory
+```
+
+7. Request Logging & Monitoring
+Provides visibility into API traffic and performance.
+
+```
+@Configuration
+public class GatewayConfig {
+    @Bean
+    public GlobalFilter loggingFilter() {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            log.info("Path: {}, Method: {}", request.getPath(), request.getMethod());
+            
+            return chain.filter(exchange)
+                .then(Mono.fromRunnable(() -> {
+                    ServerHttpResponse response = exchange.getResponse();
+                    log.info("Status: {}", response.getStatusCode());
+                }));
+        };
+    }
+}
+```
+
+8. Token Relay
+Forwards authentication tokens to downstream services.
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: account-service
+          uri: lb://account-service
+          predicates:
+            - Path=/api/accounts/**
+          filters:
+            - TokenRelay=
+```
+
+9. Request Validation
+Validates incoming requests before they reach backend services.
+
+```
+@Component
+public class RequestValidator extends AbstractGatewayFilterFactory<RequestValidator.Config> {
+    @Override
+    public GatewayFilter apply(Config config) {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            
+            // Validate request parameters
+            if (!request.getQueryParams().containsKey("apiKey")) {
+                return Mono.error(new InvalidRequestException("Missing API key"));
+            }
+            
+            return chain.filter(exchange);
+        };
+    }
+    
+    public static class Config {}
+}
+```
+
+10. Cross-Origin Resource Sharing (CORS)
+Handles CORS headers for web applications.
+
+```
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "https://example.com"
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: "*"
+            maxAge: 3600
+```
+
+11. SSL Termination
+Handles HTTPS connections and forwards requests as HTTP to internal services.
+
+```
+server:
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: password
+    key-store-type: PKCS12
+    key-alias: api-gateway
+  port: 8443
+```
+
+12. Request Aggregation
+Combines results from multiple backend services into a single response.
+
+```
+@RestController
+public class AggregationController {
+    private final WebClient webClient;
+    
+    @GetMapping("/api/dashboard")
+    public Mono<Map<String, Object>> getDashboard() {
+        Mono<UserData> userData = webClient.get()
+            .uri("lb://user-service/api/users/current")
+            .retrieve()
+            .bodyToMono(UserData.class);
+            
+        Mono<List<Order>> orders = webClient.get()
+            .uri("lb://order-service/api/orders/recent")
+            .retrieve()
+            .bodyToFlux(Order.class)
+            .collectList();
+            
+        return Mono.zip(userData, orders)
+            .map(tuple -> {
+                Map<String, Object> result = new HashMap<>();
+                result.put("user", tuple.getT1());
+                result.put("orders", tuple.getT2());
+                return result;
+            });
+    }
+}
+```
+
+13. Caching
+Caches responses to improve performance and reduce backend load.
+
+```
+@Configuration
+public class CacheConfig {
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("apiResponses");
+    }
+}
+
+@Component
+public class CachingFilter extends AbstractGatewayFilterFactory<CachingFilter.Config> {
+    @Autowired
+    private CacheManager cacheManager;
+    
+    @Override
+    public GatewayFilter apply(Config config) {
+        return (exchange, chain) -> {
+            String cacheKey = exchange.getRequest().getPath().toString();
+            Cache cache = cacheManager.getCache("apiResponses");
+            
+            Object cachedResponse = cache.get(cacheKey);
+            if (cachedResponse != null) {
+                return Mono.just(cachedResponse);
+            }
+            
+            return chain.filter(exchange)
+                .doOnSuccess(response -> cache.put(cacheKey, response));
+        };
+    }
+    
+    public static class Config {}
+}
+```
+
+14. API Versioning
+Handles different versions of APIs through routing.
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: product-service-v1
+          uri: lb://product-service-v1
+          predicates:
+            - Path=/api/v1/products/**
+        - id: product-service-v2
+          uri: lb://product-service-v2
+          predicates:
+            - Path=/api/v2/products/**
+```
+
+15. Retry Mechanism
+Automatically retries failed requests to improve resilience.
+
+```
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY
+                methods: GET,POST
+                backoff:
+                  firstBackoff: 10ms
+                  maxBackoff: 50ms
+                  factor: 2
+                  basedOnPreviousValue: false
+```
