@@ -1,42 +1,10 @@
-                                                  ┌─────────────────┐  
-                                                  │                 │  
-                                                  │    Keycloak     │  
-                                                  │  (OAuth2/OIDC)  │  
-                                                  │                 │  
-                                                  └───┬───────────┬─┘  
-                                                      │           │  
-                                                    2 ↑           ↓ 3  
-                                                      │           │  
-┌─────────────┐     1     ┌─────────────────┐        │           │     ┌─────────────────────┐  
-│             │───────────►│                 │◄───────┘           └────►│                     │  
-│    Users    │           │   API Gateway   │    4                5    │  Kubernetes API     │  
-│             │◄──────────┤ (Spring Cloud)  ├────────────────────────►│  (Service Discovery)│  
-└─────────────┘     10    └───────┬─────────┘                          └──────────┬──────────┘  
-                                  │                                               │  
-                                  │ 6                                             │  
-                                  ▼                                               │  
-                      ┌────────────────────────────────────────────────────────┐  │  
-                      │                  Kubernetes Cluster                    │  │  
-                      │                                                        │  │  
-                      │  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐   │  │  
-                      │  │             │   │             │   │             │   │  │  
-                      │  │ Service A   │   │ Service B   │   │ Service C   │◄──┼──┘  
-                      │  │ (Pod 1..n)  │   │ (Pod 1..n)  │   │ (Pod 1..n)  │   │  
-                      │  │      ▲      │   │             │   │             │   │  
-                      │  └──────┼──────┘   └─────────────┘   └─────────────┘   │  
-                      │         │                                              │  
-                      └─────────┼──────────────────────────────────────────────┘  
-                                │  
-                                │ 7,8,9  
-                                │  
-                                └───────────────────────────────────────────────┐  
-                                                                                │  
-                                                                                ▼  
 
+![image](https://github.com/user-attachments/assets/fc321b4b-10bf-4f2f-9057-e909d29fbae6)  
 
-Step-by-Step Request Flow
+  
+#### Step-by-Step Request Flow
 1. Initial Request
-User sends HTTP request to the API Gateway
+* User sends HTTP request to the API Gateway
 
 Request targets a specific service (e.g., /api/service-a/resource)
 
