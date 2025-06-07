@@ -147,6 +147,42 @@ public class SecurityConfig {
 }
 ```
 
+```
+server:
+  port: 8081
+
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/users/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - TokenRelay
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: gateway-client
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/demo
+
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/demo
+```
+
 4. Request/Response Transformation  
 Modifies requests or responses as they pass through the gateway.
 
