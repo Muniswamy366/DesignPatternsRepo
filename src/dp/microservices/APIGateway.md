@@ -61,6 +61,16 @@ Complexity: Requires careful design and management.
 * Monitoring / Logging  
 * Service Discovery (optional)
 
+#### Difference Between Rate Limiting and Throttling  
+| Feature          | **Rate Limiting**                                    | **Throttling**                                    |  
+| ---------------- | ---------------------------------------------------- | ------------------------------------------------- |  
+| **Purpose**      | Enforce a maximum number of requests per time window | Control traffic spikes and smooth out usage       |  
+| **Behavior**     | Rejects requests that exceed the limit               | Delays or queues excess requests                  |  
+| **When Applied** | Before requests hit the backend                      | During or after traffic exceeds a threshold       |  
+| **Error Code**   | Usually returns `429 Too Many Requests`              | May delay or return `429`, or retry automatically |  
+| **Example**      | Max 1000 requests/user/day                           | Allow burst of 100 requests/sec, then slow down   |  
+
+
 #### Performance Benchmark Summary
 | Gateway                  | Requests per Second (RPS) | P99 Latency (ms) | Notes                                                                        |                        |
 | ------------------------ | ------------------------- | ---------------- | ---------------------------------------------------------------------------- | ---------------------- |
