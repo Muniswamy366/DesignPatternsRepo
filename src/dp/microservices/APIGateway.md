@@ -466,7 +466,7 @@ spring:
 
 ![image](https://github.com/user-attachments/assets/d74aaf4d-bb71-46f2-9a52-443e7979b75f)  
 
-#### Is api gateway is single point of failure?
+#### Is API gateway is single point of failure?
 Yes, API Gateway can be a single point of failure (SPOF) — but only if it’s not properly designed and deployed.  
 
 #### Why API Gateway Can Be a SPOF
