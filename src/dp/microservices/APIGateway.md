@@ -476,7 +476,7 @@ If you deploy your API Gateway:
 * Without load balancing or failover
 Then, if that instance crashes, all traffic is blocked, because clients rely on it to reach the backend services.
 
-#### How to Avoid SPOF in API Gateway
+#### How to Avoid SPOF in API Gateway and How deos API gateway handles millions of requests per second?
 1. High Availability (HA) Deployment
 * Run multiple replicas of the gateway (e.g., Spring Cloud Gateway or Kong) in a Kubernetes cluster or load-balanced environment.  
 * Example in Kubernetes:
