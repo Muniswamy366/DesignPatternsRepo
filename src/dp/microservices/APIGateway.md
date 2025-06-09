@@ -466,6 +466,36 @@ spring:
 
 ![image](https://github.com/user-attachments/assets/d74aaf4d-bb71-46f2-9a52-443e7979b75f)  
 
+#### Is api gateway is single point of failure?
+Yes, API Gateway can be a single point of failure (SPOF) — but only if it’s not properly designed and deployed.  
+
+#### Why API Gateway Can Be a SPOF
+If you deploy your API Gateway:
+* As a single instance
+* On a single VM/pod
+* Without load balancing or failover
+Then, if that instance crashes, all traffic is blocked, because clients rely on it to reach the backend services.
+
+#### How to Avoid SPOF in API Gateway
+1. High Availability (HA) Deployment
+* Run multiple replicas of the gateway (e.g., Spring Cloud Gateway or Kong) in a Kubernetes cluster or load-balanced environment.  
+* Example in Kubernetes:
+```
+replicas: 3
+```
+
+2. Load Balancer in Front
+Use a cloud load balancer (like AWS ALB/NLB, GCP Load Balancer) or Kubernetes service with type LoadBalancer or Ingress to distribute traffic across gateway replicas.  
+
+3. Health Checks
+Configure liveness/readiness probes so unhealthy gateway pods are not used.  
+
+4. Auto-scaling
+Use Horizontal Pod Autoscaler (HPA) in Kubernetes to scale gateway replicas based on CPU or latency.  
+
+5. Distributed Deployments (Multi-region)
+For global systems, deploy API gateways in multiple regions behind a geo-aware load balancer (e.g., AWS Route 53 with health checks).  
+
 
 
 
