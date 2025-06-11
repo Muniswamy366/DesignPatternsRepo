@@ -81,6 +81,9 @@ Complexity: Requires careful design and management.
 Observations: Kong maintains high throughput and low latency, even with added plugins, making it suitable for high-performance applications.  
 Observations: While SCG offers decent performance, it may not match the throughput of Kong or NGINX, especially under high load.  
 Observations: NGINX provides stable and low-latency performance, making it a reliable choice for scenarios where consistent response times are critical.  
+**Throughput vs Latency**
+* If your API Gateway can handle 1 million req/sec, it's high throughput.  
+* If it responds in <10 ms per request, it's low latency.  
 
 #### Final Tip  
 In real-world systems, teams often combine:
