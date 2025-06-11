@@ -359,39 +359,7 @@ server:
   port: 8443
 ```
 
-12. Request Aggregation  
-Combines results from multiple backend services into a single response.
-
-```
-@RestController
-public class AggregationController {
-    private final WebClient webClient;
-    
-    @GetMapping("/api/dashboard")
-    public Mono<Map<String, Object>> getDashboard() {
-        Mono<UserData> userData = webClient.get()
-            .uri("lb://user-service/api/users/current")
-            .retrieve()
-            .bodyToMono(UserData.class);
-            
-        Mono<List<Order>> orders = webClient.get()
-            .uri("lb://order-service/api/orders/recent")
-            .retrieve()
-            .bodyToFlux(Order.class)
-            .collectList();
-            
-        return Mono.zip(userData, orders)
-            .map(tuple -> {
-                Map<String, Object> result = new HashMap<>();
-                result.put("user", tuple.getT1());
-                result.put("orders", tuple.getT2());
-                return result;
-            });
-    }
-}
-```
-
-13. Caching  
+12. Caching  
 Caches responses to improve performance and reduce backend load.
 
 ```
