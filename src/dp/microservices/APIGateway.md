@@ -243,8 +243,8 @@ spring:
 
 **What it means:**
 
-* The system allows 5 requests per second.  
-* Users can "burst" up to 10 requests instantly, but after that they must wait.  
+* The system allows 10 requests per second.  
+* Users can "burst" up to 20 requests instantly, but after that they must wait.  
 * If a user sends more, they get a 429 error — this is throttling.  
 
 6. Circuit Breaking  
