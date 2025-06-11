@@ -1,3 +1,4 @@
+### 1. Decomposition Patterns
 Used to break a monolith into smaller microservices.  
 🔹 a. Decompose by Business Capability  
 
