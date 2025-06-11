@@ -11,7 +11,7 @@ Used to break a monolith into smaller microservices.
     📌 Example: Customer in CRM ≠ Customer in Billing.  
 
 ### 2. Integration Patterns
-Used to make microservices talk to each other.
+Used to make microservices talk to each other.  
 🔹 a. API Gateway
 
     Entry point for all clients.
