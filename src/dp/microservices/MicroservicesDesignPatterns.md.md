@@ -70,3 +70,49 @@ Used to monitor and debug services.
     Each service exposes /health endpoint.
 
     Used by API Gateway or orchestrators (like Kubernetes).
+
+5. Resilience Patterns
+
+Used to make services fault-tolerant.
+🔹 a. Circuit Breaker
+
+    Stop calling a failing service temporarily.
+
+    📌 Resilience4j, Hystrix.
+
+🔹 b. Retry
+
+    Automatically retry failed calls.
+
+🔹 c. Timeout
+
+    Avoid waiting forever for a response.
+
+🔹 d. Bulkhead
+
+    Limit resources to prevent cascading failures.
+
+6. Security Patterns
+
+Used to secure service communication.
+🔹 a. Access Token (JWT)
+
+    Validate user identity on each request.
+
+🔹 b. OAuth2 + OpenID Connect
+
+    Secure user auth (e.g., using Google login).
+
+7. Deployment Patterns
+
+Used to deploy and manage services.
+🔹 a. Service Mesh
+
+    Transparent service communication control.
+
+    📌 Istio, Linkerd.
+
+🔹 b. Sidecar
+
+    Deploy helper containers (e.g., for logging or proxying) alongside services.
+
