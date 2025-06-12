@@ -54,11 +54,6 @@ message HelloReply {
     * Stub handles serialization (Protobuf), network calls (HTTP/2), and deserialization
 
 #### Types of RPCs in gRPC
-| Type                            | Description                                                     |
-| ------------------------------- | --------------------------------------------------------------- |
-| **Unary RPC**                   | Client sends one request, gets one response. *(Most common)*    |
-| **Server Streaming RPC**        | Client sends one request, server returns a stream of responses. |
-| **Client Streaming RPC**        | Client sends a stream of requests, gets one response.           |
-| **Bidirectional Streaming RPC** | Client and server both stream messages.                         |
+https://www.google.com/url?sa=i&url=https%3A%2F%2Famitraikwar.medium.com%2Fa-beginners-guide-to-grpc-2f580770b790&psig=AOvVaw3GJtdq0EEAUPAcy3x9lDzb&ust=1749819406950000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIiuurT3640DFQAAAAAdAAAAABAE |
 
   
