@@ -54,6 +54,8 @@ message HelloReply {
     * Stub handles serialization (Protobuf), network calls (HTTP/2), and deserialization
 
 #### Types of RPCs in gRPC
-https://www.google.com/url?sa=i&url=https%3A%2F%2Famitraikwar.medium.com%2Fa-beginners-guide-to-grpc-2f580770b790&psig=AOvVaw3GJtdq0EEAUPAcy3x9lDzb&ust=1749819406950000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIiuurT3640DFQAAAAAdAAAAABAE |
+
+![1_BFcscGPLpeCW6xNmE6xTMQ](https://github.com/user-attachments/assets/4ff4740a-b94c-42fb-9782-fc4360a8c8d9)
+
 
   
