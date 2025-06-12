@@ -60,4 +60,6 @@ Cons:
 
     Failover and health checks.
 
-    Automatic scaling.
+    Automatic scaling.  
+
+
