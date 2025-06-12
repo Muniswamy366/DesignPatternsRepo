@@ -52,7 +52,7 @@ Used to manage data across services.
 
 4. Observability Patterns
 
-Used to monitor and debug services.
+Used to monitor and debug services.  
 🔹 a. Log Aggregation
 
     Collect logs from all services in one place.
@@ -73,7 +73,7 @@ Used to monitor and debug services.
 
 5. Resilience Patterns
 
-Used to make services fault-tolerant.
+Used to make services fault-tolerant.  
 🔹 a. Circuit Breaker
 
     Stop calling a failing service temporarily.
@@ -94,7 +94,7 @@ Used to make services fault-tolerant.
 
 6. Security Patterns
 
-Used to secure service communication.
+Used to secure service communication.  
 🔹 a. Access Token (JWT)
 
     Validate user identity on each request.
@@ -105,7 +105,7 @@ Used to secure service communication.
 
 7. Deployment Patterns
 
-Used to deploy and manage services.
+Used to deploy and manage services.  
 🔹 a. Service Mesh
 
     Transparent service communication control.
