@@ -27,7 +27,7 @@ Used to make microservices talk to each other.
 
     Services call each other via REST, gRPC, or message queues.  
 
-3. Data Management Patterns
+### 3. Data Management Patterns
 
 Used to manage data across services.  
 🔹 a. Database per Service
