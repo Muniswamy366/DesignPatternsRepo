@@ -18,6 +18,11 @@ It is built on:
 | **Protocol Buffers**            | A compact binary format used for defining and serializing structured data.         |  
 | **gRPC Stub**                   | Auto-generated client/server code based on `.proto` file, handles network details. |  
 
+### What makes grpc is faster than http? 
+* Uses HTTP/2 (multiplexing - Multiple calls over a single TCP connection, compression)
+* Uses binary Protobuf (compact, fast) Avoids manual serialization/parsing using jackson.
+* Supports streaming
+
 ### How gRPC Works – Internally
 
 1. Define the API using .proto  
@@ -124,6 +129,7 @@ gRPC uses HTTP/2, which offers:
 * Great for internal services, but REST may be better for public APIs and browser clients.
 
 ### What makes grpc is faster than http? 
+
 1. Uses HTTP/2 Instead of HTTP/1.1  
 HTTP/2 Advantages:
 
