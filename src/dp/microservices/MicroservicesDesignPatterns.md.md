@@ -50,3 +50,23 @@ Used to manage data across services.
     Separate read/write models.
     📌 Speeds up queries, scales better.
 
+4. Observability Patterns
+
+Used to monitor and debug services.
+🔹 a. Log Aggregation
+
+    Collect logs from all services in one place.
+
+    📌 ELK Stack, Loki + Grafana.
+
+🔹 b. Distributed Tracing
+
+    Trace a request across multiple services.
+
+    📌 Zipkin, Jaeger.
+
+🔹 c. Health Check API
+
+    Each service exposes /health endpoint.
+
+    Used by API Gateway or orchestrators (like Kubernetes).
