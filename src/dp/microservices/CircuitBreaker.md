@@ -16,6 +16,7 @@ It monitors the calls to a remote service:
 | **Open**      | Requests are automatically failed/skipped without calling the service. |
 | **Half-Open** | A few trial requests are allowed to check if the service is back.      |
 
+### Key Concepts
 | Concept               | Meaning                                                                             |
 | --------------------- | ----------------------------------------------------------------------------------- |
 | **Failure threshold** | Number/percentage of failed requests before opening the circuit                     |
@@ -32,3 +33,34 @@ It monitors the calls to a remote service:
 * After 30s → a trial call is allowed (half-open)
   - If success → breaker closes
   - If failure → breaker remains open
+
+```
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+```
+
+When to Use Circuit Breaker?
+
+✅ Use when:
+
+    Downstream service is slow or unreliable
+
+    You want to avoid repeated timeouts
+
+    You need a fallback during temporary failures
+
+❌ Avoid when:
+
+    Failure is quick and harmless
+
+    Internal retry mechanisms are better suited
+
+
