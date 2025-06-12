@@ -1,4 +1,4 @@
-#### What is gRPC?
+### What is gRPC?
 
 gRPC (Google Remote Procedure Call) is a high-performance, open-source RPC (Remote Procedure Call) framework developed by Google.  
 
@@ -9,7 +9,7 @@ It is built on:
     Protocol Buffers (Protobuf) for serialization
     Auto-generated client/server code for multiple languages
 
-#### Key Components of gRPC
+### Key Components of gRPC
 | Component                       | Description                                                                        |  
 | ------------------------------- | ---------------------------------------------------------------------------------- |  
 | **Client**                      | Makes remote procedure calls (RPC) to the server.                                  |  
@@ -53,9 +53,79 @@ message HelloReply {
 
     * Stub handles serialization (Protobuf), network calls (HTTP/2), and deserialization
 
-#### Types of RPCs in gRPC
+### Types of RPCs in gRPC
 
-![1_BFcscGPLpeCW6xNmE6xTMQ](https://github.com/user-attachments/assets/4ff4740a-b94c-42fb-9782-fc4360a8c8d9)
+![1_BFcscGPLpeCW6xNmE6xTMQ](https://github.com/user-attachments/assets/4ff4740a-b94c-42fb-9782-fc4360a8c8d9)  
+
+
+### gRPC Transport: HTTP/2 Features
+
+gRPC uses HTTP/2, which offers:
+
+    Multiplexing: Multiple calls over a single TCP connection
+
+    Streaming: Full-duplex communication
+
+    Header compression: Reduces size of metadata
+
+    Binary framing: More efficient than text-based HTTP/1.1
+
+### gRPC vs REST – Internal Mechanics  
+| Feature             | gRPC                        | REST                            |
+| ------------------- | --------------------------- | ------------------------------- |
+| **Protocol**        | HTTP/2                      | HTTP/1.1                        |
+| **Serialization**   | Protobuf (binary)           | JSON (text)                     |
+| **Streaming**       | Built-in support            | Not native                      |
+| **Code Generation** | Yes (strong typing)         | Optional (via Swagger/OpenAPI)  |
+| **Performance**     | Faster                      | Slower (due to JSON, no HTTP/2) |
+| **Browser Support** | Limited (requires gRPC-web) | Full                            |
+
+### Advantages of gRPC
+| Benefit                    | Why It Matters                       |
+| -------------------------- | ------------------------------------ |
+| **High Performance**       | Protobuf + HTTP/2 = fast and compact |
+| **Strong Typing**          | Contracts are enforced via `.proto`  |
+| **Streaming Support**      | For real-time communication          |
+| **Multi-language Support** | Java, Python, Go, C#, Node.js, etc.  |
+| **Code Generation**        | Reduces boilerplate                  |
+| **Backward Compatibility** | Proto3 supports safe evolution       |
+
+
+### Limitations of gRPC
+| Limitation            | Details                                                                    |
+| --------------------- | -------------------------------------------------------------------------- |
+| **Browser support**   | Native browsers don’t support HTTP/2 framing – need gRPC-web or REST proxy |
+| **Complex debugging** | Binary messages are hard to read compared to JSON                          |
+| **Learning curve**    | Requires understanding Protobuf, stubs, gRPC lifecycle                     |
+| **Verbose setup**     | More initial setup than REST                                               |
+
+### Common Use Cases
+
+    Microservices communication (internal services)
+
+    Mobile-to-backend communication (low bandwidth)
+
+    Real-time apps (chat, gaming, streaming)
+
+    IoT systems with lightweight messaging
+
+### Life Cycle of a Unary gRPC Call
+
+    Client calls stub.sayHello(name)
+
+    Stub:
+
+        Serializes HelloRequest using Protobuf
+
+        Sends over HTTP/2
+
+    Server receives and deserializes message
+
+    Server calls implementation of sayHello
+
+    Server serializes HelloReply and returns
+
+    Client stub receives, deserializes, and returns the result
 
 
   
