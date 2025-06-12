@@ -27,5 +27,26 @@ Used to make microservices talk to each other.
 
     Services call each other via REST, gRPC, or message queues.  
 
+3. Data Management Patterns
 
+Used to manage data across services.  
+🔹 a. Database per Service
+
+    Each service has its own DB schema.
+    📌 Avoids tight coupling.
+
+🔹 b. Shared Database (anti-pattern, use only if needed)
+
+    Multiple services use the same DB.
+    ✅ Quick, but ❌ tightly coupled.
+
+🔹 c. Saga Pattern
+
+    Manages distributed transactions using event-driven approach.
+    📌 Useful for maintaining consistency across services.
+
+🔹 d. CQRS (Command Query Responsibility Segregation)
+
+    Separate read/write models.
+    📌 Speeds up queries, scales better.
 
