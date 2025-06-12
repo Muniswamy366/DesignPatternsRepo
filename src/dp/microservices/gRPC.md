@@ -101,31 +101,21 @@ gRPC uses HTTP/2, which offers:
 
 ### Common Use Cases
 
-    Microservices communication (internal services)
-
-    Mobile-to-backend communication (low bandwidth)
-
-    Real-time apps (chat, gaming, streaming)
-
-    IoT systems with lightweight messaging
+* Microservices communication (internal services)
+* Mobile-to-backend communication (low bandwidth)
+* Real-time apps (chat, gaming, streaming)
+* IoT systems with lightweight messaging
 
 ### Life Cycle of a Unary gRPC Call
 
-    Client calls stub.sayHello(name)
-
-    Stub:
-
-        Serializes HelloRequest using Protobuf
-
-        Sends over HTTP/2
-
-    Server receives and deserializes message
-
-    Server calls implementation of sayHello
-
-    Server serializes HelloReply and returns
-
-    Client stub receives, deserializes, and returns the result
+1. Client calls stub.sayHello(name)
+2. Stub:
+    * Serializes HelloRequest using Protobuf
+    * Sends over HTTP/2
+3. Server receives and deserializes message
+4. Server calls implementation of sayHello
+5. Server serializes HelloReply and returns
+6. Client stub receives, deserializes, and returns the result
 
 
   
