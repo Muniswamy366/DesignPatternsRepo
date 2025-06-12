@@ -117,5 +117,8 @@ gRPC uses HTTP/2, which offers:
 5. Server serializes HelloReply and returns
 6. Client stub receives, deserializes, and returns the result
 
+### Summary
 
-  
+* gRPC is a high-performance RPC framework ideal for microservices, streaming, and cross-language communication.
+* It uses Protocol Buffers and HTTP/2 for speed and efficiency.
+* Great for internal services, but REST may be better for public APIs and browser clients.
