@@ -126,10 +126,10 @@ gRPC uses HTTP/2, which offers:
 ### What makes grpc is faster than http? 
 1. Uses HTTP/2 Instead of HTTP/1.1
    HTTP/2 Advantages:
-   | Feature                | HTTP/2 (gRPC)                           | HTTP/1.1 (REST)                    |
-| ---------------------- | --------------------------------------- | ---------------------------------- |
-| **Multiplexing**       | ✅ Multiple streams over 1 connection    | ❌ One request per connection       |
-| **Binary framing**     | ✅ Efficient frame-based binary protocol | ❌ Text-based                       |
-| **Header compression** | ✅ (HPACK) reduces overhead              | ❌ Headers sent as-is               |
-| **Connection reuse**   | ✅ Persistent + concurrent streams       | ❌ Often needs multiple connections |
+| Feature                | HTTP/2 (gRPC)                           | HTTP/1.1 (REST)                    |  
+| ---------------------- | --------------------------------------- | ---------------------------------- |  
+| **Multiplexing**       | ✅ Multiple streams over 1 connection    | ❌ One request per connection       |  
+| **Binary framing**     | ✅ Efficient frame-based binary protocol | ❌ Text-based                       |  
+| **Header compression** | ✅ (HPACK) reduces overhead              | ❌ Headers sent as-is               |  
+| **Connection reuse**   | ✅ Persistent + concurrent streams       | ❌ Often needs multiple connections |  
 
