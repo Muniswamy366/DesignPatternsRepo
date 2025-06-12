@@ -124,12 +124,19 @@ gRPC uses HTTP/2, which offers:
 * Great for internal services, but REST may be better for public APIs and browser clients.
 
 ### What makes grpc is faster than http? 
-1. Uses HTTP/2 Instead of HTTP/1.1
+1. Uses HTTP/2 Instead of HTTP/1.1  
 HTTP/2 Advantages:
+
+| Feature                | HTTP/2 (gRPC)                           | HTTP/1.1 (REST)                    |
+| ---------------------- | --------------------------------------- | ---------------------------------- |
+| **Multiplexing**       | ✅ Multiple streams over 1 connection    | ❌ One request per connection       |
+| **Binary framing**     | ✅ Efficient frame-based binary protocol | ❌ Text-based                       |
+| **Header compression** | ✅ (HPACK) reduces overhead              | ❌ Headers sent as-is               |
+| **Connection reuse**   | ✅ Persistent + concurrent streams       | ❌ Often needs multiple connections |
 
 Result: Lower latency, less overhead, and better resource usage
 
-2. Binary Protocol (Protocol Buffers) Instead of JSON
+2. Binary Protocol (Protocol Buffers) Instead of JSON  
 Protobuf (used in gRPC) vs JSON:
 
 | Feature    | Protobuf (gRPC)               | JSON (REST)             |
@@ -138,17 +145,15 @@ Protobuf (used in gRPC) vs JSON:
 | **Speed**  | Fast to serialize/deserialize | Slower, more CPU        |
 | **Schema** | Strongly typed via `.proto`   | Schema-less or optional |
 
-
 Result: Smaller messages, faster parsing = faster communication
 
-3. Streaming Support
-gRPC supports:
+3. Streaming Support  
 * Client streaming
 * Server streaming
 * Bidirectional streaming
 Enables real-time communication with low latency, unlike REST which requires multiple round-trips.
 
-5. Code Generation for Stubs
+5. Code Generation for Stubs  
 * gRPC generates client/server code from .proto definitions.
 * No runtime parsing or reflection is needed.
 Less runtime logic = better performance  
