@@ -47,7 +47,7 @@ resilience4j:
         slidingWindowSize: 10
 ```
 
-When to Use Circuit Breaker?
+### When to Use Circuit Breaker?
 
 ✅ Use when:
 
@@ -63,4 +63,61 @@ When to Use Circuit Breaker?
 
     Internal retry mechanisms are better suited
 
+Detailed Explanation of Each Property
+🔹 registerHealthIndicator: true
 
+    Purpose: Integrates the circuit breaker status with Spring Boot Actuator.
+
+    Effect: You can check the health of the productService circuit breaker at:
+
+    /actuator/health
+
+    It shows if the circuit is OPEN, CLOSED, or HALF-OPEN.
+
+🔹 failureRateThreshold: 50
+
+    Purpose: Defines the percentage of failed calls (out of total recorded) to trigger the breaker to open.
+
+    Example: If 50% (or more) of the calls fail within the sliding window, the circuit opens.
+
+🔹 minimumNumberOfCalls: 5
+
+    Purpose: Specifies the minimum number of calls that must be recorded before the failure rate is calculated.
+
+    Example: If fewer than 5 calls were made, the circuit won’t evaluate the failure rate.
+
+🔹 waitDurationInOpenState: 30s
+
+    Purpose: Time the circuit breaker remains OPEN before transitioning to HALF-OPEN.
+
+    Effect: During these 30 seconds, all incoming calls are immediately rejected (fail-fast).
+
+    After 30 seconds, it enters HALF-OPEN state and allows trial requests.
+
+🔹 permittedNumberOfCallsInHalfOpenState: 3
+
+    Purpose: Number of trial calls allowed when the circuit is in HALF-OPEN state.
+
+    Effect:
+
+        If these 3 calls succeed → circuit goes to CLOSED (healthy).
+
+        If any fail → circuit goes back to OPEN (still broken).
+
+🔹 slidingWindowSize: 10
+
+    Purpose: Defines the number of recent calls to track when calculating failure rate.
+
+    Example: Out of last 10 calls, if 5 or more fail → failure rate = 50% → triggers circuit to OPEN.
+
+    The window works like a rolling log: only the most recent 10 calls are evaluated.
+
+🔁 Example Scenario
+
+- 10 API calls made
+- 6 of them fail → failure rate = 60%
+- Since 60% > 50% (failureRateThreshold), circuit opens
+- Next 30 seconds → all calls fail immediately (open state)
+- After 30s → allows 3 trial calls
+  - If all 3 succeed → closes the circuit
+  - If even 1 fails → opens the circuit again
