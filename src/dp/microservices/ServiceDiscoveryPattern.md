@@ -2,7 +2,7 @@ Service Discovery is a mechanism by which services can find and communicate with
 There are two main types of service discovery:  
 1. Client-Side Discovery
 
-    The client is responsible for querying the service registry and choosing an instance to call.
+   The client is responsible for querying the service registry and choosing an instance to call.
 
     Example: Netflix Eureka + Ribbon.
 
