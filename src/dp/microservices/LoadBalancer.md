@@ -214,6 +214,14 @@ spec:
 | **Annotations**  | `aws-load-balancer-type: "nlb"`       | `kubernetes.io/ingress.class: alb`, etc. |
 | **Use Case**     | Internal services, payment, gRPC, TLS | Public APIs, websites, web apps          |
 
+#### ELB Overview
+
+Elastic Load Balancing (ELB) is the general term for AWS’s load balancing service. It offers three main types:  
+| Type    | Full Name                      | Layer       | Protocol               |
+| ------- | ------------------------------ | ----------- | ---------------------- |
+| **CLB** | Classic Load Balancer (legacy) | Layer 4 & 7 | HTTP, HTTPS, TCP       |
+| **ALB** | Application Load Balancer      | Layer 7     | HTTP, HTTPS, WebSocket |
+| **NLB** | Network Load Balancer          | Layer 4     | TCP, UDP, TLS          |
 
 
 
