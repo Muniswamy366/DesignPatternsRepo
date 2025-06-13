@@ -50,7 +50,7 @@ spec:
 ```
 
 
-Prompt chatGPT: example of configure spring Cloud Gateway with load Balancing, kubernetes and spring boot application
+Prompt chatGPT: example of configure spring Cloud Gateway with load Balancing, kubernetes and spring boot application.  
 Client  
   |  
 Ingress (optional)  
