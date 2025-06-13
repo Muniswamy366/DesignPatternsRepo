@@ -118,7 +118,7 @@ Used to deploy and manage services.
 
 
 ## Another Prompt result: 
-1. API Gateway Pattern
+✅ 1. API Gateway Pattern
 
     Purpose: Entry point for all clients. Routes requests to appropriate microservices.
 
