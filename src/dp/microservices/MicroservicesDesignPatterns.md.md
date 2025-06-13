@@ -154,6 +154,14 @@ Used to deploy and manage services.
 
     Challenges: Cross-service queries require event-driven communication.
 
+| Challenge                | Description                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------- |
+| **Data consistency**     | No global transactions; you must use **eventual consistency** via Sagas or messaging.   |
+| **Complex queries**      | Harder to perform cross-service joins (you must build APIs or use CQRS/event sourcing). |
+| **Data duplication**     | Might need to replicate some data across services.                                      |
+| **Operational overhead** | More databases to manage, monitor, and secure.                                          |
+
+
 ✅ 5. Saga Pattern (for distributed transactions)
 
     Purpose: Manage data consistency across multiple microservices using a series of local transactions.
