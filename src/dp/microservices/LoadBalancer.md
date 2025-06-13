@@ -1,5 +1,11 @@
-### Internal Load Balancing (Between Pods)
+Kubernetes automatically load balances requests to Services of type ClusterIP, NodePort, or LoadBalancer.  
+
+### 1. Internal Load Balancing with ClusterIP (Between Pods):
 Kubernetes automatically does internal load balancing using its Service abstraction.  
+* When you create a Service, Kubernetes creates a virtual IP.
+* Incoming traffic to this IP is load-balanced across all matching pods.
+* Load balancing uses iptables/ipvs (round robin by default).
+* 
 ```
 apiVersion: v1
 kind: Service
@@ -18,7 +24,29 @@ spec:
 
 * Load balancing is done via kube-proxy using iptables or IPVS (round-robin).
 
-### External Load Balancing (To expose apps)  
+### 2. NodePort (Basic External Access)
+
+    Opens a port on every node in the cluster.
+
+    Traffic is routed to Pods via the Node IP and port.
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nodeport-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080
+  type: NodePort
+```
+Use when: you want basic external access without a cloud provider's load balancer.  
+
+### 3. External Load Balancing (To expose apps)
+#### 3a. Service Type: LoadBalancer (Common in Cloud)
 
 Use Service type: LoadBalancer to expose apps outside the cluster via a cloud provider's load balancer (like AWS ELB, Azure LB, GCP LB).  
 
@@ -62,6 +90,7 @@ Kubernetes DNS-based Service Discovery
 Spring Boot Microservices (UserService, PaymentService)  
 
 Use Spring Boot with Spring Cloud Gateway and Kubernetes integration.  
+
 ```
 <dependencies>
     <dependency>
@@ -130,7 +159,7 @@ When you use:
 ```
 uri: lb://user-service
 ```
-#### 1. Spring Cloud Gateway (via Spring Cloud LoadBalancer) will:**
+#### Spring Cloud Gateway (via Spring Cloud LoadBalancer) will:**
 
 * Ask Kubernetes (via Spring Cloud Kubernetes) for the list of available endpoints (pods) of user-service.
 
@@ -138,25 +167,32 @@ uri: lb://user-service
 
 * You do not need a third-party discovery system like Eureka here — Kubernetes provides discovery through DNS + API.
 
-#### 2. Basic LoadBalancer Service (for Web App)
-This is a standard way to expose a service via cloud provider's default L4/L7 load balancer, without using ALB Controller or AWS-specific annotations.
+#### Ingress + Ingress Controller (HTTP/S Load Balancing)
+
+    Ingress exposes HTTP/S routes using rules.
+
+    Requires an Ingress Controller like NGINX, Traefik, Istio, etc.
+
 ```
-apiVersion: v1
-kind: Service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: internal-service
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+  name: my-ingress
 spec:
-  type: LoadBalancer
-  selector:
-    app: internal
-  ports:
-    - port: 443
-      targetPort: 8443
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-lb-service
+                port:
+                  number: 80
 ```
 
-#### 3. Configure AWS NLB (Layer 4) in Kubernetes (Pod to Pod)  
+#### External Load Balancer AWS NLB (Layer 4) in Kubernetes (Pod to Pod)  
 ```
 apiVersion: v1
 kind: Service
@@ -179,7 +215,7 @@ nlb = AWS Network Load Balancer (L4).
 internal = true makes it not publicly accessible.  
 Useful for internal microservices, gRPC, TLS passthrough, etc.  
 
-#### 4. Configure AWS ALB (Layer 7) via AWS Load Balancer Controller (Pod to Pod)  
+#### External Load Balancer AWS ALB (Layer 7) via AWS Load Balancer Controller (Pod to Pod)  
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
