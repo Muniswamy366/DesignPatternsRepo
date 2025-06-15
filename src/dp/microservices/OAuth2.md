@@ -99,3 +99,18 @@ Signature: HMACSHA256(base64url(Header) + "." + base64url(Payload), secret)
 
 
 https://www.youtube.com/watch?v=ZDuRmhLSLOY
+
+
+![image](https://github.com/user-attachments/assets/884e31fd-58b9-4bc8-a1e3-c9e32fed1f18)  
+
+| Step | Description                                                                               |
+| ---- | ----------------------------------------------------------------------------------------- |
+| (1)  | User is redirected to the **Authorization Server** to log in.                             |
+| (2)  | The server displays a **login and consent screen**.                                       |
+| (3)  | After successful login, it sends back an **Authorization Code**.                          |
+| (4)  | The client exchanges this code for **ID Token (JWT)** and **Access Token**.               |
+| (5)  | Tokens are returned (usually ID Token = who you are, Access Token = what you can access). |
+| (6)  | The client uses the Access Token to call the **API Server**.                              |
+| (7)  | API Server verifies the token and responds with **protected data**.                       |
+
+
