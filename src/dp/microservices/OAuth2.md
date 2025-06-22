@@ -113,4 +113,14 @@ https://www.youtube.com/watch?v=ZDuRmhLSLOY
 | (6)  | The client uses the Access Token to call the **API Server**.                              |
 | (7)  | API Server verifies the token and responds with **protected data**.                       |
 
+### What is SSO?
 
+Single Sign-On (SSO) allows users to log in once and access multiple applications without logging in again for each one.  
+
+### What is JWT?
+
+JWT (JSON Web Token) is a compact, signed token often used to:
+
+    Represent ID tokens (identity info).
+
+    Represent access tokens (authorization info).
