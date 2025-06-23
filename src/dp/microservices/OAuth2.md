@@ -124,3 +124,34 @@ JWT (JSON Web Token) is a compact, signed token often used to:
     Represent ID tokens (identity info).
 
     Represent access tokens (authorization info).
+
+Prmopt: difference between oauth2 example and sso example with keyloak in spring boot
+
+| Feature           | OAuth2 Login (Single App) | Keycloak SSO (Multiple Apps)                     |
+| ----------------- | ------------------------- | ------------------------------------------------ |
+| `application.yml` | Config for one client     | Each app has its own client registration         |
+| Token Handling    | Tokens are app-local      | Tokens reused via Keycloak session               |
+| Cookie Usage      | No shared cookies         | Keycloak issues session cookies used across apps |
+| Logout URL        | `/logout` (local)         | `/protocol/openid-connect/logout` (global)       |
+| Redirect URI      | App-specific              | Each app must register its own URI               |
+| Number of Apps    | One                       | Two or more                                      |  
+
+
+    User logs into App A via Keycloak.
+
+    When accessing App B:
+
+        Spring Boot redirects to Keycloak.
+
+        Keycloak sees active session.
+
+        User is immediately redirected back — no password prompt.
+
+### Global Logout in Spring Boot:
+
+```
+.logout(logout -> logout
+    .logoutSuccessUrl("http://localhost:8080/realms/demo/protocol/openid-connect/logout?redirect_uri=http://localhost:8081")
+)
+```
+    Logs the user out from Keycloak and all apps.
