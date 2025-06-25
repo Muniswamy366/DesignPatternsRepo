@@ -7,18 +7,18 @@ A service mesh is an infrastructure layer for managing communication between mic
 
 #### 1. Traffic Management  
 
-    * Load balancing: Distributes requests across multiple instances.
-    * Routing: Canary deployments, blue-green deployments, A/B testing.
-    * Retries and timeouts: Automatic retrying of failed requests, avoiding cascading failures.
-    * Circuit breakers: Stops calling failing services to reduce strain.
+    Load balancing: Distributes requests across multiple instances.
+    Routing: Canary deployments, blue-green deployments, A/B testing.
+    Retries and timeouts: Automatic retrying of failed requests, avoiding cascading failures.
+    Circuit breakers: Stops calling failing services to reduce strain.
 
-2. Security  
+#### 2. Security  
 
     * Mutual TLS (mTLS): Encrypts and authenticates all service-to-service traffic.
     * Zero-trust networking: Each service must prove its identity before communication.
     * Policy enforcement: Control which services can talk to which (authorization).
 
-3. Observability  
+#### 3. Observability  
 
     * Distributed tracing: See how a request travels across multiple services.
 
@@ -26,13 +26,13 @@ A service mesh is an infrastructure layer for managing communication between mic
 
     * Logging: Centralized logs to understand traffic and debug issues.
 
-4. Resilience
+#### 4. Resilience
 
     * Failure handling: Retries, failovers, and timeouts improve system robustness.
 
     * Rate limiting and throttling: Prevent services from being overwhelmed.
 
-5. Decouples Business Logic from Communication Logic  
+#### 5. Decouples Business Logic from Communication Logic  
 
     Without a service mesh, each microservice must implement logic for:
 
