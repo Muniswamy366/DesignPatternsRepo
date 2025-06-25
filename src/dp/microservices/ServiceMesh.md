@@ -6,4 +6,23 @@ A service mesh is an infrastructure layer for managing communication between mic
 
 ### Core Idea
 
-In a microservices architecture, you have many small services talking to each other. This inter-service communication can be complex — involving security, reliability, routing, and observability. A service mesh solves this by moving those concerns out of your services and into a dedicated communication layer, typically implemented using sidecar proxies (e.g., Envoy).
+In a microservices architecture, you have many small services talking to each other. This inter-service communication can be complex — involving security, reliability, routing, and observability. A service mesh solves this by moving those concerns out of your services and into a dedicated communication layer, typically implemented using sidecar proxies (e.g., Envoy).  
+
+### How It Works
+
+Each microservice does not talk directly to another service. Instead:
+
+    A sidecar proxy is deployed alongside each service instance (in the same pod/container group).
+
+    All incoming/outgoing traffic flows through the proxy.
+
+    The service mesh control plane (e.g., Istio, Linkerd) manages the configuration of these proxies.
+
+[ Service A ] <--> [ Sidecar Proxy A ]
+                              |
+                              v
+                         [ Network ]
+                              ^
+                              |
+[ Service B ] <--> [ Sidecar Proxy B ]  
+
