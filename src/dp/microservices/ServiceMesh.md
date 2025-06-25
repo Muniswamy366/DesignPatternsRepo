@@ -18,11 +18,11 @@ Each microservice does not talk directly to another service. Instead:
 
     The service mesh control plane (e.g., Istio, Linkerd) manages the configuration of these proxies.
 
-[ Service A ] <--> [ Sidecar Proxy A ]
-                              |
-                              v
-                         [ Network ]
-                              ^
-                              |
+[ Service A ] <--> [ Sidecar Proxy A ]  
+                              |  
+                              v  
+                         [ Network ]  
+                              ^  
+                              |  
 [ Service B ] <--> [ Sidecar Proxy B ]  
 
