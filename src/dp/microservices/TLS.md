@@ -41,6 +41,14 @@ Microservice A <=> Microservice B (over HTTPS/gRPC)
 
 ✅ Example: https://inventory-service:8081/products  
 
+One-Way vs Mutual TLS
+
+| Type        | Client Authenticates Server? | Server Authenticates Client? | Use Case                          |
+| ----------- | ---------------------------- | ---------------------------- | --------------------------------- |
+| TLS (1-way) | ✅                            | ❌                            | Standard HTTPS                    |
+| mTLS        | ✅                            | ✅                            | Service-to-service authentication |
+
+
 Where TLS is Used in Microservices
 
 | Layer                        | Role of TLS                        | Example                               |
