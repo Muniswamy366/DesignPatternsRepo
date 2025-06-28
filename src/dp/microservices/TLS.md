@@ -41,7 +41,7 @@ Microservice A <=> Microservice B (over HTTPS/gRPC)
 
 ✅ Example: https://inventory-service:8081/products  
 
-One-Way vs Mutual TLS
+#### One-Way vs Mutual TLS
 
 | Type        | Client Authenticates Server? | Server Authenticates Client? | Use Case                          |
 | ----------- | ---------------------------- | ---------------------------- | --------------------------------- |
@@ -49,7 +49,7 @@ One-Way vs Mutual TLS
 | mTLS        | ✅                            | ✅                            | Service-to-service authentication |
 
 
-Where TLS is Used in Microservices
+#### Where TLS is Used in Microservices
 
 | Layer                        | Role of TLS                        | Example                               |
 | ---------------------------- | ---------------------------------- | ------------------------------------- |
@@ -58,3 +58,60 @@ Where TLS is Used in Microservices
 | 📦 Service ↔ DB/Queue        | Protect DB/Kafka/Redis connections | TLS connection to MongoDB or RabbitMQ |
 | 🚀 Gateway ↔ Identity Server | Secure auth tokens and sessions    | OAuth2 server with HTTPS              |
 
+#### How to Enable TLS in Microservices (Spring Boot Example)  
+```
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: password
+    key-store-type: PKCS12
+    key-alias: orderservice
+```
+keystore.p12 contains the server certificate and private key.  
+
+#### TLS for Internal Services (Mutual TLS)
+
+You can also use mutual TLS (mTLS), where:
+
+    Both client and server present certificates
+
+    Common in zero-trust architectures or service mesh environments
+
+    Mutual TLS is important for service-to-service authentication, not just encryption.
+
+#### Tools That Help with TLS
+
+| Tool             | Purpose                             |
+| ---------------- | ----------------------------------- |
+| **Cert-Manager** | Auto-manage TLS certs in Kubernetes |
+| **Istio**        | Enable mTLS between services        |
+| **Spring Boot**  | Easy TLS server setup               |
+| **Envoy**        | TLS termination and routing         |
+
+### Summary
+
+    TLS in microservices protects data in transit, verifies who you’re talking to, and is essential in modern secure architectures.
+
+    🔐 Use TLS for all HTTP/gRPC traffic — external and internal
+
+    ✅ Consider mTLS for service-to-service auth
+
+    🌐 Use a service mesh or API gateway to manage it at scale
+
+### How TLS Works in Practice
+When a service sends an HTTPS request:
+
+    The client requests a secure connection.
+
+    The server sends back its TLS certificate.
+
+    The client:
+
+        Validates the certificate
+
+        Negotiates encryption keys
+
+    Now both sides encrypt/decrypt using a shared session key.
+
+In mutual TLS, both sides validate each other's certificates.
