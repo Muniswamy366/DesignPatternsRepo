@@ -30,7 +30,7 @@ Clients <=> API Gateway <=> Microservices
 
     Usually with public certificates
 
-✅ Example: Client → HTTPS → https://api.company.com
+✅ Example: Client → HTTPS → https://api.company.com  
 2️⃣ Internal TLS (Service-to-Service)
 
 Microservice A <=> Microservice B (over HTTPS/gRPC)
