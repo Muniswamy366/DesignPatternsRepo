@@ -60,7 +60,7 @@ In real-world distributed environments (like cloud systems), network partitions 
 ![image](https://github.com/user-attachments/assets/9c79c7e7-e698-4caf-bae8-6b3d5d564557)
 
 
-https://www.youtube.com/watch?v=BHqjEjzAicA
+https://www.youtube.com/watch?v=BHqjEjzAicA  
 https://www.youtube.com/watch?v=VdrEq0cODu4  
 
 
