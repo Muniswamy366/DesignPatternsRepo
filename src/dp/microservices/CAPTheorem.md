@@ -55,9 +55,13 @@ This results in three system archetypes:
 ### Why It Matters
 In real-world distributed environments (like cloud systems), network partitions are bound to happen. That’s why designers must choose what’s more critical:
 - Banking systems might favor Consistency (no incorrect balances!)
-- Social media platforms might favor Availability (feed loads, even if slightly out of date)
+- Social media platforms might favor Availability (feed loads, even if slightly out of date)  
+
+![image](https://github.com/user-attachments/assets/9c79c7e7-e698-4caf-bae8-6b3d5d564557)
 
 
+https://www.youtube.com/watch?v=BHqjEjzAicA
+https://www.youtube.com/watch?v=VdrEq0cODu4  
 
 
 
