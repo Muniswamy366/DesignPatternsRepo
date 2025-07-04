@@ -1,6 +1,38 @@
 What is the CAP Theorem?
 The CAP theorem states that a distributed data system can only guarantee two out of the following three properties at any given time:  
 
+### 1. Consistency (C)
+
+Every read receives the most recent write (or an error).
+
+    💡 Like in a traditional RDBMS — when you write something, any read from any node should immediately return the updated value.
+
+Example:
+
+    Write: Set balance to ₹5000
+
+    Read from any replica: Must return ₹5000
+
+### 2. Availability (A)
+
+Every request (read or write) gets a non-error response, even if it’s not the latest data.
+
+    💡 The system is always responsive — it won’t deny your request, even if it's using stale data.
+
+Example:
+
+    One node goes down, but the system still returns a (possibly older) value instead of an error.
+
+### 3. Partition Tolerance (P)
+
+The system continues to operate even if network failures occur between nodes.
+
+    💡 In real distributed systems, partitions will happen, so partition tolerance is non-negotiable.
+
+Example:
+
+    A data center in Mumbai can't communicate with one in Delhi, but both should still continue functioning.
+
 | Property                | Description                                                                                          |  
 | ----------------------- | ---------------------------------------------------------------------------------------------------- |  
 | Consistency (C)         | Every read receives the most recent write or an error. All nodes see the same data at the same time. |  
