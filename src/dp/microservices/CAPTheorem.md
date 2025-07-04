@@ -11,7 +11,7 @@ The CAP theorem states that a distributed data system can only guarantee two out
 In a partitioned network (which is inevitable in distributed systems), you have to choose between Consistency and Availability:  
 - If you prioritize Consistency, the system may reject requests (becoming unavailable) during a partition.
 - If you prioritize Availability, the system may return outdated or inconsistent data to keep running.
-This results in three system archetypes:
+This results in three system archetypes:  
 | System Type                          | Properties Guaranteed                                                        | Real-World Examples                                |  
 | ------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------- |  
 | CP (Consistent + Partition Tolerant) | Sacrifices Availability                                                      | HBase, MongoDB (in some configs)                   |  
