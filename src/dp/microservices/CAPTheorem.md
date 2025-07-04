@@ -5,7 +5,8 @@ The CAP theorem states that a distributed data system can only guarantee two out
 
 Every read receives the most recent write (or an error).
 
-    💡 Like in a traditional RDBMS — when you write something, any read from any node should immediately return the updated value.
+    💡 Like in a traditional RDBMS — when you write something,
+    any read from any node should immediately return the updated value.
 
 Example:
 
