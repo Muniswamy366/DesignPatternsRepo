@@ -12,8 +12,8 @@ In a partitioned network (which is inevitable in distributed systems), you have 
 - If you prioritize Consistency, the system may reject requests (becoming unavailable) during a partition.
 - If you prioritize Availability, the system may return outdated or inconsistent data to keep running.
 This results in three system archetypes:
-| System Type                          | Properties Guaranteed                                                        | Real-World Examples                                |
-| ------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------- |
+| System Type                          | Properties Guaranteed                                                        | Real-World Examples                                |  
+| ------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------- |  
 | CP (Consistent + Partition Tolerant) | Sacrifices Availability                                                      | HBase, MongoDB (in some configs)                   |  
 | AP (Available + Partition Tolerant)  | Sacrifices Consistency                                                       | Couchbase, Cassandra                               |  
 | CA (Consistent + Available)          | Only works if no partition occurs (theoretical in large distributed systems) | Often infeasible in real-world distributed systems |  
