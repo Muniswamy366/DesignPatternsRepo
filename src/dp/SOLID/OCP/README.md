@@ -13,6 +13,7 @@ https://www.baeldung.com/java-open-closed-principle#:~:text=As%20the%20name%20su
 
 Open/Closed Principle (OCP) Software entities should be open for extension but closed for modification.
 
+```
 // Bad Example
 class PaymentProcessor {
     void processPayment(String type) {
@@ -42,3 +43,4 @@ class PayPalPayment implements PaymentMethod {
         // process PayPal payment
     }
 }
+```
