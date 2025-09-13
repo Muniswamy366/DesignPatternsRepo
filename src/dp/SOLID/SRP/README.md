@@ -15,16 +15,19 @@ There are multiple responsibilities are handled in single UserController class.
 
 A class should have only one reason to change.
 
+```
 ❌ Violation:
 public class Invoice {
     public void calculateTotal() { /* logic */ }
     public void printInvoice() { /* logic */ }
     public void saveToDB() { /* logic */ }
 }
+```
 
 ✅ Solution:
 Split responsibilities:
 
+```
 public class Invoice {
     public void calculateTotal() { /* logic */ }
 }
@@ -36,3 +39,4 @@ public class InvoicePrinter {
 public class InvoiceRepository {
     public void save(Invoice invoice) { /* logic */ }
 }
+```
