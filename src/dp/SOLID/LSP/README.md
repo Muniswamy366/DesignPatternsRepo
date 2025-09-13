@@ -11,7 +11,7 @@ https://www.javaguides.net/2018/02/liskov-substitution-principle.html
 1. Subtypes must be substitutable for their base types without breaking behavior.
 
 ❌ Violation:
-
+```
 class Bird {
     public void fly() {}
 }
@@ -19,10 +19,12 @@ class Bird {
 class Ostrich extends Bird {
     public void fly() { throw new UnsupportedOperationException(); }
 }
+```
 
 ✅ Solution:
 Redesign the hierarchy:
 
+```
 interface Bird {}
 
 interface FlyingBird extends Bird {
@@ -36,12 +38,12 @@ class Sparrow implements FlyingBird {
 class Ostrich implements Bird {
     // does not fly
 }
+```
 
-
-2.    
-❌ LSP Violation Example
+2. ❌ LSP Violation Example
 Let's say you have a Vehicle class that assumes all vehicles can be refueled with petrol:
 
+```
 class Vehicle {
     public void refuel() {
         System.out.println("Refueling with petrol...");
@@ -61,6 +63,7 @@ class ElectricCar extends Vehicle {
         throw new UnsupportedOperationException("Electric cars cannot be refueled with petrol!");
     }
 }
+```
 
 🚫 Problem:
 ElectricCar inherits refuel() but cannot implement it meaningfully.
@@ -70,6 +73,7 @@ If a method expects a Vehicle and calls refuel(), it may break when passed an El
 ✅ LSP-Compliant Design
 Instead of one generic Vehicle class with refuel(), we separate concerns using interfaces:
 
+```
 interface Vehicle {
     void drive();
 }
@@ -105,6 +109,8 @@ class ElectricCar implements Vehicle, Rechargeable {
         System.out.println("Recharging electric car...");
     }
 }
+```
+
 ✅ Benefits:
 Now, PetrolCar and ElectricCar are used through the right interfaces.
 
