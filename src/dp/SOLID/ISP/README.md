@@ -14,7 +14,7 @@ https://www.javaguides.net/2018/02/interface-segregation-principle.html#:~:text=
 
 
 ❌ Violation:
-
+```
 interface Machine {
     void print();
     void scan();
@@ -26,9 +26,12 @@ class OldPrinter implements Machine {
     public void scan() { throw new UnsupportedOperationException(); }
     public void fax() { throw new UnsupportedOperationException(); }
 }
+```
+
 ✅ Solution:
 Split interfaces:
 
+```
 interface Printer {
     void print();
 }
@@ -40,3 +43,4 @@ interface Scanner {
 class OldPrinter implements Printer {
     public void print() { /* print only */ }
 }
+```
