@@ -1,0 +1,1 @@
+Template Method Pattern defines the skeleton of an algorithm in a base class and lets subclasses override specific steps without changing the overall structure.
