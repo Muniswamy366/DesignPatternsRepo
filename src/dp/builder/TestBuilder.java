@@ -1,4 +1,4 @@
-public class Employee {
+class Employee {
 
     private String name;
     private String company;
@@ -41,12 +41,12 @@ public class Employee {
         }
 
         //setter methods for optional fields
-        public EmployeeBuilder setHasCar(boolean hasCar) {
+        public EmployeeBuilder hasCar(boolean hasCar) {
             this.hasCar = hasCar;
             return this;
         }
 
-        public EmployeeBuilder setHasBike(boolean hasBike) {
+        public EmployeeBuilder hasBike(boolean hasBike) {
             this.hasBike = hasBike;
             return this;
         }
@@ -61,6 +61,6 @@ public class Employee {
 class TestBuilder {
     public static void main(String[] args) {
         //Building the object of Employee thru the build() method provided in EmployeeBuilder class.
-        Employee employee = new Employee.EmployeeBuilder("Vikram", "ABC").setHasBike(false).setHasBike(true).build();
+        Employee employee = new Employee.EmployeeBuilder("Vikram", "ABC").hasBike(false).hasBike(true).build();
     }
 }
