@@ -44,7 +44,7 @@ class Sparrow implements FlyingBird {
     public void fly() { /* flying logic */ }
 }
 
-class Ostrich implements Bird {
+class Penguin implements Bird {
     // does not fly
 }
 ```
