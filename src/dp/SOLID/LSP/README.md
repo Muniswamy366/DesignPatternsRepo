@@ -13,12 +13,21 @@ https://www.javaguides.net/2018/02/liskov-substitution-principle.html
 ❌ Violation:
 ```
 class Bird {
-    public void fly() {}
+    public void fly() {
+        System.out.println("Flying");
+    }
 }
 
-class Ostrich extends Bird {
-    public void fly() { throw new UnsupportedOperationException(); }
+class Penguin extends Bird {
+    @Override
+    public void fly() {
+        throw new UnsupportedOperationException("Penguins can't fly");
+    }
 }
+
+Bird bird = new Penguin();
+bird.fly();  // runtime error
+
 ```
 
 ✅ Solution:
