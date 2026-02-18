@@ -1,8 +1,34 @@
 ### Interface Segregation Principle (ISP)
 
-Don't force a class to implement interfaces it doesn't use.
+Clients should not be forced to depend on interfaces they do not use.  
+
+In simple words:  
+
+👉 Don’t create “fat interfaces”  
+👉 Split large interfaces into smaller, specific ones  
+
+Instead of one huge interface:
+
+Java separates:  
+
+List  
+
+Set  
+
+Queue  
+
+Deque  
+
+Each has specific responsibilities.  
 
 The Interface Segregation Principle states that clients should not be forced to implement interfaces they don't use. ISP splits interfaces that are very large into smaller and more specific ones so that clients will only have to know about the methods that are of interest to them.
+
+| ISP                       | LSP                               |
+| ------------------------- | --------------------------------- |
+| About interface size      | About behavioral substitutability |
+| Prevents fat interfaces   | Prevents broken inheritance       |
+| Compile-time design issue | Runtime behavior issue            |
+
 
 
 LSP segrigating related classes under one umbrilla, ISP is used to segrigate method into specific interface.
