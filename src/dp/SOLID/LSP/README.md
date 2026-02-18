@@ -1,6 +1,7 @@
 ### Liskov Substitution Principle (LSP)
 
-objects of a superclass should be replaceable with objects of its subclasses without breaking the application
+objects of a superclass should be replaceable with objects of its subclasses without breaking the application.  
+LSP ensures behavioral substitutability — subclasses must behave in a way that does not break the expectations set by the base class.
 
 Explanation:
 https://www.youtube.com/watch?v=129QkkXUHeQ
