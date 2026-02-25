@@ -51,4 +51,4 @@ Clients are forced to depend on methods they do not use.
 
 CashPayment depends on refund() even though it doesn't support it.  
 
-** This is a design-level issue.**  
+**This is a design-level issue.**  
