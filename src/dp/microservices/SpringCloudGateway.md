@@ -290,7 +290,7 @@ public JwtAuthenticationConverter jwtAuthenticationConverter() {
 
 ### 5. Alternative: Interceptor Approach
 
-```
+```java
 package com.ecommerce.product.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -325,7 +325,7 @@ public class JwtMdcInterceptor implements HandlerInterceptor {
 
 ```
 ### Register Interceptor:
-```
+```java
 package com.ecommerce.product.config;
 
 import com.ecommerce.product.interceptor.JwtMdcInterceptor;
