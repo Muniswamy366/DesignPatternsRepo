@@ -599,16 +599,4 @@ spring:
 
 ---
 
-## Summary
-
-This chat covered:
-1. ✅ Spring Cloud Gateway with OAuth2 & Keycloak
-2. ✅ E-commerce microservices example
-3. ✅ JWT extraction and MDC logging
-4. ✅ Role extraction from JWT tokens
-5. ✅ Centralized security library (Spring Boot Starter)
-6. ✅ User-based rate limiting
-7. ✅ Request throttling
-8. ✅ Redis storage for distributed systems
-
-**All code is production-ready and follows industry best practices!**
+## Redis stores: throttle:user-id-123 = "45" (expires in 60 seconds)
