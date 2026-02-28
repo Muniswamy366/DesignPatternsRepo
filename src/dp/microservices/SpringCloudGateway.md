@@ -512,54 +512,70 @@ Request 11-15: 429 (Rate limit exceeded)
 
 ### Custom Throttling Filter
 ```java
+package com.ecommerce.gateway.filter;
+
+import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
+
+import java.time.Duration;
+
 @Component
-public class ThrottleGatewayFilterFactory extends AbstractGatewayFilterFactory<ThrottleGatewayFilterFactory.Config> {
-    private final Map<String, ThrottleInfo> throttleMap = new ConcurrentHashMap<>();
+public class RedisThrottleGatewayFilterFactory extends AbstractGatewayFilterFactory<RedisThrottleGatewayFilterFactory.Config> {
+
+    private final ReactiveRedisTemplate<String, String> redisTemplate;
+
+    public RedisThrottleGatewayFilterFactory(ReactiveRedisTemplate<String, String> redisTemplate) {
+        super(Config.class);
+        this.redisTemplate = redisTemplate;
+    }
 
     @Override
     public GatewayFilter apply(Config config) {
-        return (exchange, chain) -> {
-            String userId = exchange.getPrincipal()
-                .cast(JwtAuthenticationToken.class)
-                .map(auth -> auth.getToken().getSubject())
-                .blockOptional()
-                .orElse("anonymous");
-
-            ThrottleInfo throttle = throttleMap.computeIfAbsent(userId, 
-                k -> new ThrottleInfo(config.getMaxRequests(), config.getWindowSeconds()));
-
-            if (throttle.allowRequest()) {
-                return chain.filter(exchange);
-            } else {
-                exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
-                return exchange.getResponse().setComplete();
-            }
-        };
+        return (exchange, chain) -> exchange.getPrincipal()
+            .cast(org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken.class)
+            .map(auth -> auth.getToken().getSubject())
+            .defaultIfEmpty("anonymous")
+            .flatMap(userId -> {
+                String key = "throttle:" + userId;
+                
+                return redisTemplate.opsForValue()
+                    .increment(key)
+                    .flatMap(count -> {
+                        if (count == 1) {
+                            return redisTemplate.expire(key, Duration.ofSeconds(config.getWindowSeconds()))
+                                .thenReturn(count);
+                        }
+                        return Mono.just(count);
+                    })
+                    .flatMap(count -> {
+                        long remaining = Math.max(0, config.getMaxRequests() - count);
+                        
+                        exchange.getResponse().getHeaders().add("X-RateLimit-Limit", String.valueOf(config.getMaxRequests()));
+                        exchange.getResponse().getHeaders().add("X-RateLimit-Remaining", String.valueOf(remaining));
+                        
+                        if (count <= config.getMaxRequests()) {
+                            return chain.filter(exchange);
+                        } else {
+                            exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
+                            exchange.getResponse().getHeaders().add("Retry-After", String.valueOf(config.getWindowSeconds()));
+                            return exchange.getResponse().setComplete();
+                        }
+                    });
+            });
     }
 
     public static class Config {
         private int maxRequests = 100;
         private int windowSeconds = 60;
-    }
 
-    private static class ThrottleInfo {
-        private final int maxRequests;
-        private final long windowMillis;
-        private long windowStart;
-        private int requestCount;
-
-        public synchronized boolean allowRequest() {
-            long now = System.currentTimeMillis();
-            if (now - windowStart >= windowMillis) {
-                windowStart = now;
-                requestCount = 0;
-            }
-            if (requestCount < maxRequests) {
-                requestCount++;
-                return true;
-            }
-            return false;
-        }
+        public int getMaxRequests() { return maxRequests; }
+        public void setMaxRequests(int maxRequests) { this.maxRequests = maxRequests; }
+        public int getWindowSeconds() { return windowSeconds; }
+        public void setWindowSeconds(int windowSeconds) { this.windowSeconds = windowSeconds; }
     }
 }
 ```
@@ -580,62 +596,6 @@ spring:
                 maxRequests: 100
                 windowSeconds: 60
 ```
-
----
-
-## Question 10: Where Requests Are Stored
-
-**User:** where the requests are storing?
-
-**Answer:**
-
-### In-Memory Storage (ConcurrentHashMap)
-```java
-private final Map<String, ThrottleInfo> throttleMap = new ConcurrentHashMap<>();
-```
-
-**Stored in:** Gateway JVM Memory (Heap)
-
-**Structure:**
-```
-throttleMap = {
-    "user-id-123": ThrottleInfo(windowStart=1705320000000, requestCount=45),
-    "user-id-456": ThrottleInfo(windowStart=1705320000000, requestCount=12)
-}
-```
-
-### Redis Storage
-
-**Redis Keys:**
-```
-throttle:user-id-123 = "45"  (expires in 60 seconds)
-request_rate_limiter.{user-id-123}.tokens = "7"
-```
-
-**View in Redis:**
-```bash
-docker exec -it <redis-container> redis-cli
-
-# View all keys
-KEYS throttle:*
-KEYS request_rate_limiter.*
-
-# Get user's count
-GET throttle:user-id-123
-
-# Monitor real-time
-MONITOR
-```
-
-### Storage Comparison
-
-| Method | Storage | Persistence | Multi-Instance | Speed |
-|--------|---------|-------------|----------------|-------|
-| **ConcurrentHashMap** | JVM Heap | ❌ Lost on restart | ❌ Single instance | ⚡ Fastest |
-| **Redis Counter** | Redis Memory | ✅ Persistent | ✅ Distributed | 🚀 Very Fast |
-| **Redis Sorted Set** | Redis Memory | ✅ Persistent | ✅ Distributed | 🏃 Fast |
-
-**Recommendation:** Use Redis for production - distributed, persistent, and supports multiple gateway instances.
 
 ---
 
