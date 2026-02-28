@@ -5,7 +5,7 @@ A single entry point for all clients to interact with backend microservices.
 
 Decouples clients from services.
 
-Centralized routing, authentication, rate limiting.
+Centralized routing, authentication, rate limiting, throttling.
 
 **Tools:**
 Kong, Spring Cloud Gateway, Zuul, NGINX, Ambassador.  
