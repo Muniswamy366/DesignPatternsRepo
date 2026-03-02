@@ -60,7 +60,7 @@ This results in three system archetypes:
 | System Type                          | Properties Guaranteed                                                        | Real-World Examples                                |  
 | ------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------- |  
 | CP (Consistent + Partition Tolerant) | Sacrifices Availability                                                      | HBase, MongoDB (in some configs)                   |  
-| AP (Available + Partition Tolerant)  | Sacrifices Consistency                                                       | Couchbase, Cassandra                               |  
+| AP (Available + Partition Tolerant)  | Sacrifices Consistency                                                       | Couchbase, Cassandra, DynamoDB                     |  
 | CA (Consistent + Available)          | Only works if no partition occurs (theoretical in large distributed systems) | Often infeasible in real-world distributed systems |  
 
 ### Why It Matters
