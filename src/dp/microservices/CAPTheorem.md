@@ -44,6 +44,17 @@ Example:
 In a partitioned network (which is inevitable in distributed systems), you have to choose between Consistency and Availability:  
 - If you prioritize Consistency, the system may reject requests (becoming unavailable) during a partition.
 - If you prioritize Availability, the system may return outdated or inconsistent data to keep running.
+
+What is a Network Partition?
+
+A network partition occurs when nodes in a distributed system cannot communicate with each other due to a network failure, even though they are still running.
+
+In simple terms:
+```text
+Server A  ❌  Server B
+```
+Both are alive
+But they cannot talk to each other.
 This results in three system archetypes:
 
 | System Type                          | Properties Guaranteed                                                        | Real-World Examples                                |  
