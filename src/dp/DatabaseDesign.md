@@ -44,7 +44,7 @@ Conflict is detected during update.
 🧠 How It Works
 
 Uses a version field.
-``` sql
+```sql
 id | balance | version
 1  | 100     | 1
 Transaction 1
