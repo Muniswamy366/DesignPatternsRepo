@@ -1,5 +1,5 @@
 
-### What is ACID?
+### 1. What is ACID?
 
 ACID defines the four properties of a reliable database transaction:
 
