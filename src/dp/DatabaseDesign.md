@@ -49,25 +49,30 @@ id | balance | version
 1  | 100     | 1
 Transaction 1
 ```
-
+Transaction 1:
 Reads:
-
+```
 balance=100, version=1
+```
 
 Updates:
 
+```sql
 UPDATE account
 SET balance = 120, version = 2
 WHERE id = 1 AND version = 1;
 Transaction 2
+```
 
+Transaction 2:
 Also read version=1.
 
 When it tries update:
-
+``` sql
 UPDATE account
 SET balance = 150, version = 2
 WHERE id = 1 AND version = 1;
+```
 
 But version is now 2.
 
@@ -76,6 +81,7 @@ Update affects 0 rows → conflict detected.
 Transaction fails.
 
 🟢 Spring Boot Example (JPA)
+```java
 @Entity
 public class Account {
 
@@ -87,12 +93,13 @@ public class Account {
     @Version
     private int version;
 }
+```
 
 Spring automatically:
 
-Adds version check
+- Adds version check
 
-Throws OptimisticLockException on conflict
+- Throws OptimisticLockException on conflict
 
 ✅ Pros
 
@@ -122,7 +129,9 @@ Other transactions must wait.
 
 Uses:
 
+```sql
 SELECT * FROM account WHERE id=1 FOR UPDATE;
+```
 
 This locks the row.
 
@@ -131,9 +140,11 @@ Until transaction commits:
 Other transactions cannot update it
 
 🔴 Spring Boot Example
+```java
 @Lock(LockModeType.PESSIMISTIC_WRITE)
 @Query("SELECT a FROM Account a WHERE a.id = :id")
 Account findByIdForUpdate(Long id);
+```
 
 This applies DB-level lock.
 
@@ -156,13 +167,17 @@ Blocking
 Slower performance
 
 📊 Comparison Table
-Feature	Optimistic Lock	Pessimistic Lock
-Lock timing	No lock while reading	Lock immediately
-Conflict handling	Detect at commit	Prevent upfront
-Performance	High	Lower
-Deadlock risk	No	Yes
-Retry needed	Yes	No
-Best for	Read-heavy	Write-heavy / high conflict
+
+| Feature           | Optimistic Lock       | Pessimistic Lock            |
+| ----------------- | --------------------- | --------------------------- |
+| Lock timing       | No lock while reading | Lock immediately            |
+| Conflict handling | Detect at commit      | Prevent upfront             |
+| Performance       | High                  | Lower                       |
+| Deadlock risk     | No                    | Yes                         |
+| Retry needed      | Yes                   | No                          |
+| Best for          | Read-heavy            | Write-heavy / high conflict |
+
+
 🏗 Real-World Examples
 🟢 Optimistic Locking Used In
 
