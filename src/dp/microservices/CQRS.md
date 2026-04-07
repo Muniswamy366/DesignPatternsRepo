@@ -73,20 +73,6 @@ Flow:
 
 ---
 
-## 🔹 5. Domain Complexity (DDD Systems)
-
-👉 Example: Insurance, Banking
-
-* Complex business rules for writes
-* Simple UI queries
-
-📌 Result:
-
-* Keeps write logic clean
-* Simplifies read operations
-
----
-
 ## 🔹 6. Real-Time Systems / Event Sourcing
 
 👉 Example: Audit logs, trading systems
