@@ -489,18 +489,6 @@ Need new feature?
 
 ---
 
-## 📊 Architecture View
-
-![Image](https://6850195.fs1.hubspotusercontent-na1.net/hubfs/6850195/Imported_Blog_Media/ES-CQRS-Sketch-4.svg)
-
-![Image](https://miro.medium.com/1%2AAzfKr9ZL-BLaRmiaIUBakw.png)
-
-![Image](https://6850195.fs1.hubspotusercontent-na1.net/hubfs/6850195/Live-Projections-1-1.svg)
-
-![Image](https://f.hubspotusercontent40.net/hubfs/6850195/live-projections-social-1.png)
-
----
-
 # 🆚 CQRS vs CQRS + Event Sourcing
 
 | Feature     | CQRS Only     | CQRS + Event Sourcing |
