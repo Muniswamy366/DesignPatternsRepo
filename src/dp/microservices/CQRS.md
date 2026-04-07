@@ -9,63 +9,6 @@ https://github.com/Java-Techie-jt/cqrs-design-pattern
 🎯 Goal:
 - To optimize ``performance, scalability``, and security by handling reads and writes separately.
 
-#### When to Use  
-
-1. 🧠 Separation of Concerns
-  - Writes (Commands): Focus on business logic and validations.
-
-  - Reads (Queries): Focus on displaying data efficiently (e.g., joined DTOs).
-
-  - This makes your code cleaner, simpler, and easier to maintain.
-
-2. ⚡ Performance Optimization
-- Read models can be denormalized and optimized for fast queries.
-
-- Write models can focus on consistency and validation.
-
-- You can use different databases (e.g., SQL for writes, NoSQL for reads).
-
-3. 📈 Independent Scaling
-- Read traffic is usually much higher than write traffic.
-
-- With CQRS, you can scale read and write services separately.  
-
-✅ Use CQRS when:
-
-- High read/write load
-
-- Complex business logic on commands
-
-- Need different scaling for read and write
-
-- Event sourcing or distributed systems involved
-
-🚫 Avoid CQRS when:
-
-- Simple CRUD system
-
-- Low scalability needs
-
-- Team isn’t experienced in handling eventual consistency
-
-
-
-
-
-
-
-
-
-
-
-## 🧠 What is CQRS (Quick Recap)
-
-**CQRS (Command Query Responsibility Segregation)** = Separate systems for:
-
-* **Commands (Write)** → create/update/delete
-* **Queries (Read)** → fetch data
-
----
 
 # 🎯 When to Use CQRS (Real Use Cases)
 
@@ -247,4 +190,381 @@ Flow:
 👉 “CQRS is useful when read and write workloads differ significantly. It improves performance and scalability by separating read and write models, allowing independent optimization. It’s commonly used in event-driven microservices and systems with complex queries or high read traffic.”
 
 ---
+
+
+# Why i need to use Event Sourcing with CQRS
+
+## 🎯 Why use **Event Sourcing with CQRS?**
+
+👉 Short answer:
+**CQRS separates reads/writes, and Event Sourcing makes the write side powerful, auditable, and reliable by storing every change as an event.**
+
+---
+
+# 🧠 1. The Core Idea
+
+* **CQRS** → separates **Command (write)** and **Query (read)**
+* **Event Sourcing** → stores **events instead of current state**
+
+👉 Together:
+
+* Write side = **append events**
+* Read side = **build views from events**
+
+---
+
+# 🚨 Problem with CQRS Alone
+
+If you use only CQRS (without event sourcing):
+
+* You store **only the latest state**
+* You lose:
+
+  * history
+  * audit trail
+  * debugging ability
+
+👉 Example:
+
+```text
+Order = SHIPPED
+```
+
+❌ You don’t know *how* it became shipped
+
+---
+
+# 🔥 What Event Sourcing Adds to CQRS
+
+## 🔹 1. Complete Audit Trail
+
+Every change is stored:
+
+```text
+OrderCreated
+PaymentCompleted
+OrderShipped
+```
+
+✅ You know the full lifecycle
+👉 Critical for banking, insurance
+
+---
+
+## 🔹 2. Replay & Time Travel ⏱️
+
+* Rebuild state anytime by replaying events
+* Debug production issues
+
+👉 Example:
+
+* “What was system state yesterday?” → replay events
+
+---
+
+## 🔹 3. Natural Fit for Event-Driven Systems
+
+CQRS already uses events to update read models
+
+👉 Event sourcing makes events the **source of truth**
+
+Works perfectly with:
+
+* Apache Kafka
+
+---
+
+## 🔹 4. Better Data Consistency Model
+
+* Single source = event log
+* Read models are just **projections**
+
+👉 If read DB is corrupted:
+
+* Rebuild from events ✅
+
+---
+
+## 🔹 5. Scalability & Performance
+
+* Writes = append-only (fast)
+* Reads = optimized projections
+
+---
+
+## 🔹 6. Flexibility for Future Changes
+
+Need new feature?
+
+👉 Just create new projection:
+
+* No need to change existing DB
+
+---
+
+# 📊 How They Work Together
+
+## 🔄 Flow:
+
+1. Command → Validate
+2. Store event (Event Store)
+3. Publish event via Apache Kafka
+4. Read model updates
+
+---
+
+## 📊 Architecture View
+
+![Image](https://6850195.fs1.hubspotusercontent-na1.net/hubfs/6850195/Imported_Blog_Media/ES-CQRS-Sketch-4.svg)
+
+![Image](https://miro.medium.com/1%2AAzfKr9ZL-BLaRmiaIUBakw.png)
+
+![Image](https://6850195.fs1.hubspotusercontent-na1.net/hubfs/6850195/Live-Projections-1-1.svg)
+
+![Image](https://f.hubspotusercontent40.net/hubfs/6850195/live-projections-social-1.png)
+
+---
+
+# 🆚 CQRS vs CQRS + Event Sourcing
+
+| Feature     | CQRS Only     | CQRS + Event Sourcing |
+| ----------- | ------------- | --------------------- |
+| Data stored | Current state | Events                |
+| Audit trail | ❌ No          | ✅ Yes                 |
+| Replay      | ❌ No          | ✅ Yes                 |
+| Debugging   | Hard          | Easy                  |
+| Complexity  | Medium        | High                  |
+
+---
+
+# ⚠️ When You SHOULD Use It
+
+✅ Banking / financial systems
+✅ Order lifecycle tracking
+✅ Audit-heavy systems
+✅ Event-driven microservices
+
+---
+
+# ❌ When NOT to Use
+
+❌ Simple CRUD apps
+❌ Low-scale systems
+❌ When history is not needed
+
+👉 It adds complexity
+
+---
+
+# 🎯 Interview Answer (Best 3–4 lines)
+
+👉
+“Event Sourcing is used with CQRS to make the write side store events instead of current state. This provides a complete audit trail, allows replaying events to rebuild state, and fits naturally with event-driven architectures using Kafka. It improves scalability and flexibility but adds complexity.”
+
+---
+
+# 🚀 Architect-Level Insight
+
+👉 Production combo:
+
+* CQRS + Event Sourcing
+* Outbox Pattern (for reliability)
+* Apache Kafka (event streaming)
+
+👉 Used in:
+
+* Trading platforms
+* Payment systems
+* Large-scale microservices
+
+---
+
+
+
+
+## 🎯 Why use **Event Sourcing with CQRS?**
+
+👉 Short answer:
+**CQRS separates reads/writes, and Event Sourcing makes the write side powerful, auditable, and reliable by storing every change as an event.**
+
+---
+
+# 🧠 1. The Core Idea
+
+* **CQRS** → separates **Command (write)** and **Query (read)**
+* **Event Sourcing** → stores **events instead of current state**
+
+👉 Together:
+
+* Write side = **append events**
+* Read side = **build views from events**
+
+---
+
+# 🚨 Problem with CQRS Alone
+
+If you use only CQRS (without event sourcing):
+
+* You store **only the latest state**
+* You lose:
+
+  * history
+  * audit trail
+  * debugging ability
+
+👉 Example:
+
+```text
+Order = SHIPPED
+```
+
+❌ You don’t know *how* it became shipped
+
+---
+
+# 🔥 What Event Sourcing Adds to CQRS
+
+## 🔹 1. Complete Audit Trail
+
+Every change is stored:
+
+```text
+OrderCreated
+PaymentCompleted
+OrderShipped
+```
+
+✅ You know the full lifecycle
+👉 Critical for banking, insurance
+
+---
+
+## 🔹 2. Replay & Time Travel ⏱️
+
+* Rebuild state anytime by replaying events
+* Debug production issues
+
+👉 Example:
+
+* “What was system state yesterday?” → replay events
+
+---
+
+## 🔹 3. Natural Fit for Event-Driven Systems
+
+CQRS already uses events to update read models
+
+👉 Event sourcing makes events the **source of truth**
+
+Works perfectly with:
+
+* Apache Kafka
+
+---
+
+## 🔹 4. Better Data Consistency Model
+
+* Single source = event log
+* Read models are just **projections**
+
+👉 If read DB is corrupted:
+
+* Rebuild from events ✅
+
+---
+
+## 🔹 5. Scalability & Performance
+
+* Writes = append-only (fast)
+* Reads = optimized projections
+
+---
+
+## 🔹 6. Flexibility for Future Changes
+
+Need new feature?
+
+👉 Just create new projection:
+
+* No need to change existing DB
+
+---
+
+# 📊 How They Work Together
+
+## 🔄 Flow:
+
+1. Command → Validate
+2. Store event (Event Store)
+3. Publish event via Apache Kafka
+4. Read model updates
+
+---
+
+## 📊 Architecture View
+
+![Image](https://6850195.fs1.hubspotusercontent-na1.net/hubfs/6850195/Imported_Blog_Media/ES-CQRS-Sketch-4.svg)
+
+![Image](https://miro.medium.com/1%2AAzfKr9ZL-BLaRmiaIUBakw.png)
+
+![Image](https://6850195.fs1.hubspotusercontent-na1.net/hubfs/6850195/Live-Projections-1-1.svg)
+
+![Image](https://f.hubspotusercontent40.net/hubfs/6850195/live-projections-social-1.png)
+
+---
+
+# 🆚 CQRS vs CQRS + Event Sourcing
+
+| Feature     | CQRS Only     | CQRS + Event Sourcing |
+| ----------- | ------------- | --------------------- |
+| Data stored | Current state | Events                |
+| Audit trail | ❌ No          | ✅ Yes                 |
+| Replay      | ❌ No          | ✅ Yes                 |
+| Debugging   | Hard          | Easy                  |
+| Complexity  | Medium        | High                  |
+
+---
+
+# ⚠️ When You SHOULD Use It
+
+✅ Banking / financial systems
+✅ Order lifecycle tracking
+✅ Audit-heavy systems
+✅ Event-driven microservices
+
+---
+
+# ❌ When NOT to Use
+
+❌ Simple CRUD apps
+❌ Low-scale systems
+❌ When history is not needed
+
+👉 It adds complexity
+
+---
+
+# 🎯 Interview Answer (Best 3–4 lines)
+
+👉
+“Event Sourcing is used with CQRS to make the write side store events instead of current state. This provides a complete audit trail, allows replaying events to rebuild state, and fits naturally with event-driven architectures using Kafka. It improves scalability and flexibility but adds complexity.”
+
+---
+
+# 🚀 Architect-Level Insight
+
+👉 Production combo:
+
+* CQRS + Event Sourcing
+* Outbox Pattern (for reliability)
+* Apache Kafka (event streaming)
+
+👉 Used in:
+
+* Trading platforms
+* Payment systems
+* Large-scale microservices
+
+---
+
 
