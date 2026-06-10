@@ -4,6 +4,7 @@ The CAP theorem states that a distributed data system can only guarantee two out
 ### 1. Consistency (C)
 
 Every read receives the most recent write (or an error).
+Any read from any node must return same data at same time.
 
     💡 Like in a traditional RDBMS — when you write something,
     any read from any node should immediately return the updated value.
